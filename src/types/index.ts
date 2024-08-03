@@ -1,3 +1,5 @@
+import { Icons } from "@/components/ui/icons";
+
 export interface ResponseType {
   success: boolean;
   message?: string;
@@ -24,9 +26,24 @@ export interface User {
   lastName: string;
   email: string;
   profile: string;
-  password: string;
+  password?: string;
   status: string;
-  createdAt: string;
+  createdAt?: string;
   role: Role;
   subRole: SubRole;
+}
+
+export interface NavItem {
+  title: string;
+  href?: string;
+  disabled?: boolean;
+  external?: boolean;
+  icon?: keyof typeof Icons;
+  label?: string;
+  description?: string;
+  access: string[];
+}
+
+export interface SidebarProps {
+  className?: string;
 }

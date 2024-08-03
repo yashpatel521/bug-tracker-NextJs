@@ -16,7 +16,7 @@ const LandingPage = () => {
           <h1 className="text-2xl font-bold">
             <Logo />
           </h1>
-          {/* <ThemeToggle /> */}
+          <ThemeToggle />
         </div>
       </header>
       <Separator />

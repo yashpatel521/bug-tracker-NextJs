@@ -26,8 +26,6 @@ export const authConfig: NextAuthOptions = {
 
         const user = response.data.user;
 
-        console.log("Authorized User:", user); // Log user data to inspect
-
         return user;
       },
     }),
@@ -39,19 +37,11 @@ export const authConfig: NextAuthOptions = {
   callbacks: {
     async jwt({ token, user }) {
       if (user) {
-        token.id = user.id;
-        token.firstName = user.firstName;
-        token.lastName = user.lastName;
-        token.email = user.email;
-        token.profile = user.profile;
-        token.status = user.status;
-        token.role = user.role;
-        token.subRole = user.subRole;
+        token = { ...user, token };
       }
       return token;
     },
     async session({ session, token }) {
-      console.log("Session User:", token); // Log user data to inspect
       if (token) {
         session.user = token as any;
       }

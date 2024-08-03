@@ -1,5 +1,2 @@
-const ENV = process.env;
-export const PORT = ENV.PORT || 5001;
-
-export const BACKEND_URL: string =
-  (process.env.BACKEND_URL as string) || "http://localhost:5000";
+export const PORT = process.env.PORT || 5001;
+export const BACKEND_URL = process.env.BACKEND_URL || "http://localhost:5000";
