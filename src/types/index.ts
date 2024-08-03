@@ -19,8 +19,8 @@ export interface SubRole {
 }
 
 export interface User {
-  accessToken?: string;
-  refreshToken?: string;
+  accessToken: string;
+  refreshToken: string;
   id: number;
   firstName: string;
   lastName: string;

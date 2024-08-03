@@ -18,13 +18,15 @@ export const authConfig: NextAuthOptions = {
         const { email, password } = credentials;
         const response = await login(email, password);
 
-        console.log("Login response:", response);
-
         if (response.success === false) {
           throw new Error("Invalid email or password");
         }
 
-        const user = response.data.user;
+        const user = {
+          ...response.data.user,
+          accessToken: response.data.accessToken,
+          refreshToken: response.data.refreshToken,
+        };
 
         return user;
       },
