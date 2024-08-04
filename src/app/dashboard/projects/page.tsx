@@ -1,4 +1,4 @@
-import { getProjectData } from "@/action/projects";
+import { getAllProjectData } from "@/action/projects";
 import ProjectGridView from "@/components/projects/ProjectGridView";
 import ProjectSearchBar from "@/components/projects/ProjectSearchBar";
 import ProjectTableView from "@/components/projects/ProjectTableView";
@@ -21,7 +21,7 @@ const ProjectPage = async ({
   const breadcrumbItems = [{ title: "Projects", link: "/dashboard/projects" }];
   const query = searchParams?.query || "";
   const currentPage = Number(searchParams?.currentPage) || 1;
-  const projectsData = await getProjectData(query, currentPage);
+  const projectsData = await getAllProjectData(query, currentPage);
 
   return (
     <div className="flex-1 space-y-4 p-4 pt-6 md:p-8">

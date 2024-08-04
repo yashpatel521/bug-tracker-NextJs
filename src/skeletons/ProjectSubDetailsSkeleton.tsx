@@ -1,6 +1,6 @@
 import { Separator } from "@/components/ui/separator";
 
-export default function AppDetailsSkeleton() {
+export default function ProjectSubDetailsSkeleton() {
   return (
     <div className="m-1 col-span-1 animate-pulse">
       <div className="border border-gray-300 shadow rounded-md p-4 max-w-sm w-full mx-auto">

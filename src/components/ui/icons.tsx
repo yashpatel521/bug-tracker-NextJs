@@ -1,5 +1,5 @@
 type IconProps = React.HTMLAttributes<SVGElement>;
-import { CubeIcon } from "@radix-ui/react-icons";
+import { CubeIcon, Pencil2Icon } from "@radix-ui/react-icons";
 import {
   AlertTriangle,
   ArrowRight,
@@ -37,6 +37,7 @@ import {
 export type IconType = LucideIcon;
 export const Icons: any = {
   dashboard: LayoutDashboardIcon,
+  pencil2: Pencil2Icon,
   login: LogIn,
   close: X,
   profile: User2Icon,

@@ -4,7 +4,7 @@ import React from "react";
 import { Separator } from "@/components/ui/separator";
 import BreadCrumbSkeleton from "@/skeletons/BreadcrumbSkeleton";
 import ProjectHeaderSkeleton from "@/skeletons/ProjectHeaderSkeleton";
-import AppDetailsSkeleton from "@/skeletons/AppDetailsSkeleton";
+import AppDetailsSkeleton from "@/skeletons/ProjectSubDetailsSkeleton";
 
 const ProjectDetailsSkeleton = () => {
   return (
