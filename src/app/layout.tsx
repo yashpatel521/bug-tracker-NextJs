@@ -5,7 +5,6 @@ import NextTopLoader from "nextjs-toploader";
 import { Metadata } from "next";
 import ClientProviders from "@/components/ClientProviders";
 import { Toaster } from "@/components/ui/toaster";
-// import { Toaster } from "@/components/ui/toaster";
 
 export const metadata: Metadata = {
   title: "Brighter Bee",
@@ -22,8 +21,8 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <body className={`${inter.className} md:overflow-hidden`}>
-        <NextTopLoader color="var(--themeColor)" showSpinner={false} />
         <ThemeProvider attribute="class" defaultTheme="light" enableSystem>
+          <NextTopLoader color="var(--themeColor)" showSpinner={true} />
           <ClientProviders>{children}</ClientProviders>
           <Toaster />
         </ThemeProvider>

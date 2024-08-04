@@ -47,3 +47,65 @@ export interface NavItem {
 export interface SidebarProps {
   className?: string;
 }
+
+export interface ContentProps {
+  title: string;
+  svg: string;
+  value: number;
+  description: string;
+}
+export interface PinProject {
+  id: number;
+  project: ProjectDetails;
+}
+
+export interface ProjectDetails {
+  id: number;
+  title: string;
+  summary: string;
+  score: number;
+  scoreText: string;
+  description: string;
+  descriptionHTML: string;
+  appId: string;
+  appUrl: string;
+  appIcon: string;
+  developer: string;
+  developerId: string;
+  developerEmail: string;
+  firebaseAccount: string;
+  privacyPolicyUrl: string;
+  status: "complete" | "inprogress" | "onhold" | "inreview";
+  LiveUpdatedAt: string;
+  createdAt: string;
+  updatedAt: string;
+  userProjects?: UserProject[];
+  dailyStats?: DailyStats[];
+  versions?: Version[];
+  maxInstalls: number;
+  ratings: number;
+  reviews: number;
+  isPinned: boolean;
+}
+
+export interface DailyStats {
+  id: number;
+  installCount: string;
+  ratingCount: string;
+  reviewCount: string;
+  date: string;
+}
+
+export interface Version {
+  id: number;
+  versionNumber: string;
+  repositoryUrl: string;
+  liveUrl: string;
+  createdAt: string;
+  createdBy: User;
+}
+
+export interface UserProject {
+  id: number;
+  user: User;
+}

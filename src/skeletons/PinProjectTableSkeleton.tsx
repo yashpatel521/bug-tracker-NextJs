@@ -8,7 +8,7 @@ import {
 } from "@/components/ui/card";
 import { Separator } from "@/components/ui/separator";
 
-const PinProjectsSkeleton = () => {
+const PinProjectTableSkeleton = () => {
   return (
     <div className="m-1 animate-pulse">
       <Card className="col-span-6 md:col-span-5 shadow-2xl dark:shadow-none">
@@ -29,4 +29,4 @@ const PinProjectsSkeleton = () => {
   );
 };
 
-export default PinProjectsSkeleton;
+export default PinProjectTableSkeleton;

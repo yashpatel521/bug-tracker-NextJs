@@ -1,5 +1,9 @@
 import ProjectStats from "@/components/dashboard/ProjectStats";
 import TimeBasedGreeting from "@/components/TimeBaseGreeter";
+import ProjectStatsSkeleton from "@/skeletons/ProjectStatsSkeleton";
+import { Suspense } from "react";
+import PinProjectTable from "@/components/dashboard/PinProjectTable";
+import PinProjectTableSkeleton from "@/skeletons/PinProjectTableSkeleton";
 
 export default async function page() {
   return (
@@ -10,9 +14,15 @@ export default async function page() {
         </h2>
       </div>
       <div className="grid gap-4 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-4">
-        <ProjectStats />
+        <Suspense fallback={<ProjectStatsSkeleton />}>
+          <ProjectStats />
+        </Suspense>
       </div>
-      <div className="grid grid-cols-2 ">{/* <PinProjects /> */}</div>
+      <div className="grid grid-cols-2 ">
+        <Suspense fallback={<PinProjectTableSkeleton />}>
+          <PinProjectTable />
+        </Suspense>
+      </div>
     </div>
   );
 }
