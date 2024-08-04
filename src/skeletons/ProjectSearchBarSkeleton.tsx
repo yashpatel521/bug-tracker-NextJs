@@ -1,6 +1,6 @@
 import React from "react";
 
-const SearchInputSkeleton = () => {
+const ProjectSearchBarSkeleton = () => {
   return (
     <div className="flex items-center justify-between">
       <div className="bg-gray-400 animate-pulse h-10 w-full max-w-sm rounded"></div>
@@ -12,4 +12,4 @@ const SearchInputSkeleton = () => {
   );
 };
 
-export default SearchInputSkeleton;
+export default ProjectSearchBarSkeleton;

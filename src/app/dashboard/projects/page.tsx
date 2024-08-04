@@ -5,6 +5,10 @@ import ProjectTableView from "@/components/projects/ProjectTableView";
 import BreadCrumb from "@/components/ui/breadcrumb";
 import { Separator } from "@/components/ui/separator";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import BreadCrumbSkeleton from "@/skeletons/BreadcrumbSkeleton";
+import ProjectGridViewSkeleton from "@/skeletons/ProjectGridViewSkeleton";
+import ProjectSearchBarSkeleton from "@/skeletons/ProjectSearchBarSkeleton";
+import { Suspense } from "react";
 
 const ProjectPage = async ({
   searchParams,
@@ -21,9 +25,11 @@ const ProjectPage = async ({
 
   return (
     <div className="flex-1 space-y-4 p-4 pt-6 md:p-8">
-      <BreadCrumb items={breadcrumbItems} />
+      <Suspense fallback={<BreadCrumbSkeleton />}>
+        <BreadCrumb items={breadcrumbItems} />
+      </Suspense>
 
-      <Tabs defaultValue="listView" className="w-full">
+      <Tabs defaultValue="gridView" className="w-full">
         <div className="flex justify-between mb-2">
           <h2 className="text-3xl font-bold tracking-tight">All Projects</h2>
           <TabsList className="grid grid-cols-2 w-[200px]">
@@ -32,9 +38,13 @@ const ProjectPage = async ({
           </TabsList>
         </div>
         <Separator />
-        <ProjectSearchBar totalPages={+projectsData.totalPages} />
+        <Suspense fallback={<ProjectSearchBarSkeleton />}>
+          <ProjectSearchBar totalPages={+projectsData.totalPages} />
+        </Suspense>
         <TabsContent value="gridView">
-          <ProjectGridView data={projectsData.result} />
+          <Suspense fallback={<ProjectGridViewSkeleton />}>
+            <ProjectGridView data={projectsData.result} />
+          </Suspense>
         </TabsContent>
         <TabsContent value="listView">
           <ProjectTableView data={projectsData.result} />
