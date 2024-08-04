@@ -60,3 +60,9 @@ export function customToast(
     description: type,
   });
 }
+
+export function dateToString(date: string) {
+  // format dd-MM-yyyy
+  const d = new Date(date);
+  return `${d.getDate()}-${d.getMonth() + 1}-${d.getFullYear()}`;
+}

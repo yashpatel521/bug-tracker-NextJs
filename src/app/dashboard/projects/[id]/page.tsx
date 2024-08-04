@@ -11,6 +11,7 @@ import ProjectSubDetailsSkeleton from "@/skeletons/ProjectSubDetailsSkeleton";
 import ProjectChartInfo from "@/components/projects/ProjectChartInfo";
 import ProjectHistoryTable from "@/components/projects/ProjectHistoryTable";
 import ProjectTeamMemberTable from "@/components/projects/ProjectTeamMemberTable";
+import ProjectVersionHistoryTable from "@/components/projects/ProjectVersionHistoryTable";
 
 const ProjectDeatilsPage = async ({ params }: { params: { id: string } }) => {
   const projectData = await getProjectDetailsData(+params.id);
@@ -27,7 +28,7 @@ const ProjectDeatilsPage = async ({ params }: { params: { id: string } }) => {
         <BreadCrumb items={breadcrumbItems} />
       </Suspense>
       <Separator className="mb-1" />
-      <Tabs defaultValue="info" className="w-full mt-2">
+      <Tabs defaultValue="bugs" className="w-full mt-2">
         <TabsList className="grid w-full grid-cols-3">
           <TabsTrigger value="info">Details</TabsTrigger>
           <TabsTrigger value="bugs">Bugs</TabsTrigger>
@@ -84,10 +85,10 @@ const ProjectDeatilsPage = async ({ params }: { params: { id: string } }) => {
           /> */}
         </TabsContent>
         <TabsContent value="versions">
-          {/* <VersionTable
-            versions={projectDetails.versions ?? []}
-            projectId={projectDetails.id}
-          /> */}
+          <ProjectVersionHistoryTable
+            versions={projectData.versions ?? []}
+            projectId={projectData.id}
+          />
         </TabsContent>
       </Tabs>
     </div>
