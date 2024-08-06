@@ -94,3 +94,15 @@ export function generateRandomPassword(): string {
   // return password.join("");
   return "ChangeMe@123";
 }
+
+export function newVersionNumber(versionNumber: string): string {
+  const versionParts = versionNumber.split(".");
+  const lastPart = versionParts.pop();
+  if (lastPart === undefined || isNaN(parseInt(lastPart))) {
+    throw new Error("Invalid version number format");
+  }
+  const incrementedPart = (parseInt(lastPart) + 1).toString();
+  versionParts.push(incrementedPart);
+  const newVersion = versionParts.join(".");
+  return newVersion;
+}

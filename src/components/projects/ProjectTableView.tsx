@@ -11,10 +11,9 @@ import {
 import Image from "next/image";
 import AvatarList from "../ui/AvatarList";
 import Link from "next/link";
-import { Icons } from "../ui/icons";
+import TogglePinProjectButton from "../TogglePinProjectButton";
 
 const ProjectTableView = ({ data }: { data: ProjectDetails[] }) => {
-  const EyeIcon = Icons["Eye"];
   return (
     <Table className="border">
       <TableHeader>
@@ -23,7 +22,7 @@ const ProjectTableView = ({ data }: { data: ProjectDetails[] }) => {
           <TableHead>Title</TableHead>
           <TableHead>Developers Account</TableHead>
           <TableHead>Team Members</TableHead>
-          <TableHead>Action</TableHead>
+          <TableHead className="text-center">Pin/UnPin</TableHead>
         </TableRow>
       </TableHeader>
       <TableBody>
@@ -31,17 +30,19 @@ const ProjectTableView = ({ data }: { data: ProjectDetails[] }) => {
           <TableRow key={item.id}>
             <TableCell>{item.id}</TableCell>
             <TableCell className="font-medium">
-              <div className="flex  items-center gap-2">
-                <Image
-                  src={item.appIcon}
-                  width={40}
-                  height={40}
-                  alt="icon"
-                  className="rounded-full w-10 h-10"
-                  unoptimized={true}
-                />
-                <div className="capitalize">{item.title}</div>
-              </div>
+              <Link href={`./projects/${item.id}`}>
+                <div className="flex  items-center gap-2">
+                  <Image
+                    src={item.appIcon}
+                    width={40}
+                    height={40}
+                    alt="icon"
+                    className="rounded-full w-10 h-10"
+                    unoptimized={true}
+                  />
+                  <div className="capitalize">{item.title}</div>
+                </div>
+              </Link>
             </TableCell>
             <TableCell>{item.developer || "-"}</TableCell>
             <TableCell>
@@ -49,10 +50,8 @@ const ProjectTableView = ({ data }: { data: ProjectDetails[] }) => {
                 avatarList={item.userProjects?.map((i) => i.user) ?? []}
               />
             </TableCell>
-            <TableCell>
-              <Link href={`./projects/${item.id}`}>
-                <EyeIcon />
-              </Link>
+            <TableCell className="text-center">
+              <TogglePinProjectButton id={+item.id} isPinned={!item.isPinned} />
             </TableCell>
           </TableRow>
         ))}

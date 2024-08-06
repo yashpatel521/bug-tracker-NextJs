@@ -22,12 +22,9 @@ const ProjectPage = async ({
   const query = searchParams?.query || "";
   const currentPage = Number(searchParams?.currentPage) || 1;
   const projectsData = await getAllProjectData(query, currentPage);
-
   return (
     <div className="flex-1 space-y-4 p-4 pt-6 md:p-8">
-      <Suspense fallback={<BreadCrumbSkeleton />}>
-        <BreadCrumb items={breadcrumbItems} />
-      </Suspense>
+      <BreadCrumb items={breadcrumbItems} />
 
       <Tabs defaultValue="gridView" className="w-full">
         <div className="flex justify-between mb-2">

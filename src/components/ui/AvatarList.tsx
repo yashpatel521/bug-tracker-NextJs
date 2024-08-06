@@ -28,7 +28,7 @@ const AvatarList = ({ avatarList }: { avatarList: User[] }) => {
         ))}
         {avatarList.length > maxAvatars && (
           <Avatar
-            className="relative -ml-3 border border-white bg-gray-200 text-gray-600"
+            className="relative -ml-3 border border-white "
             style={{ zIndex: 0 }}
           >
             <AvatarFallback>+{avatarList.length - maxAvatars}</AvatarFallback>

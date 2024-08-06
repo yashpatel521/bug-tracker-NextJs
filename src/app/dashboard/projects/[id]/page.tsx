@@ -44,7 +44,7 @@ const ProjectDeatilsPage = async ({
         <BreadCrumb items={breadcrumbItems} />
       </Suspense>
       <Separator className="mb-1" />
-      <Tabs defaultValue="bugs" className="w-full mt-2">
+      <Tabs defaultValue="info" className="w-full mt-2">
         <TabsList className="grid w-full grid-cols-3">
           <TabsTrigger value="info">Details</TabsTrigger>
           <TabsTrigger value="bugs">Bugs</TabsTrigger>

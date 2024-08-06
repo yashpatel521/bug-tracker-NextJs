@@ -14,6 +14,7 @@ import { Role, SubRole } from "@/types";
 import { Input } from "../ui/input";
 import { createNewUser } from "@/action/user";
 import { generateRandomPassword } from "@/lib/utils";
+import Image from "next/image";
 const CreateUserForm = ({
   roles,
   subRoles,
@@ -25,6 +26,7 @@ const CreateUserForm = ({
   const [successMessage, setSuccessMessage] = useState<string>("");
   const [passwordVisible, setPasswordVisible] = useState<boolean>(true);
   const [role, setRole] = useState<number>();
+  const [imageFile, setImageFile] = useState<string>("");
   const [subRole, setSubRole] = useState<number>();
 
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
@@ -194,6 +196,8 @@ const CreateUserForm = ({
                   </SelectContent>
                 </Select>
               </div>
+            </div>
+            <div className="flex gap-5 mb-4">
               <div className="mb-4">
                 <label htmlFor="status" className="block font-medium text-md">
                   Profile :
@@ -203,7 +207,22 @@ const CreateUserForm = ({
                   placeholder="Upload Image"
                   name="image"
                   required
+                  onChange={(e) => {
+                    e.target.files &&
+                      setImageFile(URL.createObjectURL(e.target.files[0]));
+                  }}
                 />
+              </div>
+              <div>
+                {imageFile && (
+                  <Image
+                    className="rounded-full border w-24 h-24"
+                    src={imageFile}
+                    alt="Profile Pic"
+                    width={100}
+                    height={100}
+                  ></Image>
+                )}
               </div>
             </div>
             {errorMessage && (
