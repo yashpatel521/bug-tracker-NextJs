@@ -17,6 +17,7 @@ const SubRoleTable = async () => {
         <TableHeader>
           <TableRow>
             <TableHead className="text-center">Index</TableHead>
+            <TableHead>Roles</TableHead>
             <TableHead>Sub Roles</TableHead>
             <TableHead className="text-center">Created At</TableHead>
           </TableRow>
@@ -27,7 +28,10 @@ const SubRoleTable = async () => {
               <TableCell className="capitalize text-center">
                 {++index}
               </TableCell>
-              <TableCell className="text-center font-medium flex items-center align-middle gap-2 capitalize">
+              <TableCell className="text-center capitalize">
+                {item.role.name}
+              </TableCell>
+              <TableCell className="text-center capitalize">
                 {item.name}
               </TableCell>
               <TableCell className="capitalize text-center">
