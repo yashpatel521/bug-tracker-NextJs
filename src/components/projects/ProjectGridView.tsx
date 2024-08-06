@@ -38,7 +38,9 @@ const ProjectGridView = ({ data }: { data: ProjectDetails[] }) => {
             </div>
             <Separator />
             <div className="w-full flex items-center justify-between">
-              <AvatarList avatarList={appData.userProjects ?? []} />
+              <AvatarList
+                avatarList={appData.userProjects?.map((i) => i.user) ?? []}
+              />
               <Link href={`./projects/${appData.id}`}>
                 <EyeIcon />
               </Link>

@@ -31,6 +31,7 @@ export interface User {
   createdAt?: string;
   role: Role;
   subRole: SubRole;
+  projectAssigned?: number;
 }
 
 export interface NavItem {
@@ -109,3 +110,93 @@ export interface UserProject {
   id: number;
   user: User;
 }
+
+export type Bug = {
+  id: number;
+  title: string;
+  description: string;
+  status: bugStatus;
+  priority: bugPriority;
+  type: bugType;
+  reportedBy: User;
+  assignedTo: User[];
+  createdAt: string;
+  updatedAt: string;
+  images: BugImage[];
+};
+
+export type BugImage = {
+  id: number;
+  src: string;
+};
+
+export type bugStatus =
+  | "backlog"
+  | "todo"
+  | "inprogress"
+  | "complete"
+  | "closed"
+  | "assigned"
+  | "new";
+export const bugStatusArray = [
+  {
+    value: "backlog",
+    label: "Backlog",
+  },
+  {
+    value: "todo",
+    label: "Todo",
+  },
+  {
+    value: "inprogress",
+    label: "In Progress",
+  },
+  {
+    value: "complete",
+    label: "Complete",
+  },
+  {
+    value: "closed",
+    label: "Closed",
+  },
+  {
+    value: "assigned",
+    label: "Assigned",
+  },
+  {
+    value: "new",
+    label: "New",
+  },
+];
+
+export type bugPriority = "low" | "medium" | "high";
+export const bugPriorityArray = [
+  {
+    value: "low",
+    label: "Low",
+  },
+  {
+    value: "medium",
+    label: "Medium",
+  },
+  {
+    value: "high",
+    label: "High",
+  },
+];
+
+export type bugType = "bug" | "feature" | "enhancement";
+export const bugTypeArray = [
+  {
+    value: "bug",
+    label: "Bug",
+  },
+  {
+    value: "feature",
+    label: "Feature",
+  },
+  {
+    value: "enhancement",
+    label: "Enhancement",
+  },
+];

@@ -45,7 +45,9 @@ const ProjectTableView = ({ data }: { data: ProjectDetails[] }) => {
             </TableCell>
             <TableCell>{item.developer || "-"}</TableCell>
             <TableCell>
-              <AvatarList avatarList={item.userProjects ?? []} />
+              <AvatarList
+                avatarList={item.userProjects?.map((i) => i.user) ?? []}
+              />
             </TableCell>
             <TableCell>
               <Link href={`./projects/${item.id}`}>

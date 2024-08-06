@@ -12,8 +12,24 @@ import ProjectChartInfo from "@/components/projects/ProjectChartInfo";
 import ProjectHistoryTable from "@/components/projects/ProjectHistoryTable";
 import ProjectTeamMemberTable from "@/components/projects/ProjectTeamMemberTable";
 import ProjectVersionHistoryTable from "@/components/projects/ProjectVersionHistoryTable";
+import ProjectBugTable from "@/components/projects/Bug/BugTable";
+import BugSkeletonTable from "@/skeletons/bugSkeleton";
 
-const ProjectDeatilsPage = async ({ params }: { params: { id: string } }) => {
+const ProjectDeatilsPage = async ({
+  params,
+  searchParams,
+}: {
+  params: {
+    id: string;
+  };
+  searchParams: {
+    query?: string;
+    currentPage?: string;
+    sortBy?: string;
+    sortOrder?: string;
+    versionId?: string;
+  };
+}) => {
   const projectData = await getProjectDetailsData(+params.id);
   const breadcrumbItems = [
     { title: "Projects", link: `/dashboard/projects` },
@@ -73,16 +89,16 @@ const ProjectDeatilsPage = async ({ params }: { params: { id: string } }) => {
           </div>
         </TabsContent>
         <TabsContent value="bugs">
-          {/* <BugTable
-            query={query}
-            currentPage={currentPage}
-            sortBy={sortBy}
-            sortOrder={sortOrder}
-            versionList={projectDetails.versions ?? []}
-            versionId={(versionId || projectDetails.versions?.[0]?.id) ?? ""}
-            projectId={projectDetails.id}
-            userProjects={projectDetails.userProjects ?? []}
-          /> */}
+          <Suspense
+            fallback={<BugSkeletonTable />}
+            key={JSON.stringify(searchParams)}
+          >
+            <ProjectBugTable
+              projectData={projectData}
+              searchParams={searchParams}
+              userProjects={projectData.userProjects ?? []}
+            />
+          </Suspense>
         </TabsContent>
         <TabsContent value="versions">
           <ProjectVersionHistoryTable

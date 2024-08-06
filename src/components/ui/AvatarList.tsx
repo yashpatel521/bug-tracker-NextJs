@@ -1,9 +1,9 @@
 import React from "react";
 import { Avatar, AvatarFallback, AvatarImage } from "./avatar";
-import { UserProject } from "@/types";
+import { User } from "@/types";
 import { getInitials } from "@/lib/utils";
 
-const AvatarList = ({ avatarList }: { avatarList: UserProject[] }) => {
+const AvatarList = ({ avatarList }: { avatarList: User[] }) => {
   const maxAvatars = 4;
 
   return (
@@ -17,16 +17,11 @@ const AvatarList = ({ avatarList }: { avatarList: UserProject[] }) => {
             } border border-white`}
             style={{ zIndex: avatarList.length - index }}
           >
-            {avatar.user.profile ? (
-              <AvatarImage
-                src={avatar.user.profile}
-                alt={avatar.user.profile}
-              />
+            {avatar.profile ? (
+              <AvatarImage src={avatar.profile} alt={avatar.profile} />
             ) : (
               <AvatarFallback>
-                {getInitials(
-                  `${avatar.user.firstName} ${avatar.user.lastName}`
-                )}
+                {getInitials(`${avatar.firstName} ${avatar.lastName}`)}
               </AvatarFallback>
             )}
           </Avatar>

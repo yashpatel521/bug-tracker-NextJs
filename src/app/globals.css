@@ -87,4 +87,74 @@
     height: 100vh; /* Fallback */
     height: 100dvh;
   }
+
+  .animate-honeycomb {
+    animation: honeycomb 2.1s infinite backwards;
+  }
+  .delay-100 {
+    animation-delay: 0.1s;
+  }
+  .delay-200 {
+    animation-delay: 0.2s;
+  }
+  .delay-300 {
+    animation-delay: 0.3s;
+  }
+  .delay-400 {
+    animation-delay: 0.4s;
+  }
+  .delay-500 {
+    animation-delay: 0.5s;
+  }
+  .delay-600 {
+    animation-delay: 0.6s;
+  }
+  .delay-700 {
+    animation-delay: 0.7s;
+  }
+}
+
+@layer components {
+  .hexagon {
+    position: absolute;
+    width: 24px;
+    height: 12px;
+    background: var(--themeColor);
+    margin-top: 6px;
+  }
+
+  .hexagon:before,
+  .hexagon:after {
+    content: "";
+    position: absolute;
+    left: 0;
+    right: 0;
+    border-left: 12px solid transparent;
+    border-right: 12px solid transparent;
+  }
+
+  .hexagon:before {
+    top: -6px;
+    border-bottom: 6px solid var(--themeColor);
+  }
+
+  .hexagon:after {
+    bottom: -6px;
+    border-top: 6px solid var(--themeColor);
+  }
+}
+
+@keyframes honeycomb {
+  0%,
+  20%,
+  80%,
+  100% {
+    opacity: 0;
+    transform: scale(0);
+  }
+  30%,
+  70% {
+    opacity: 1;
+    transform: scale(1);
+  }
 }
