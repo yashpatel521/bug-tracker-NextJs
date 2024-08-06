@@ -16,6 +16,7 @@ export interface SubRole {
   id: number;
   name: string;
   createdAt: string;
+  role: Role;
 }
 
 export interface User {

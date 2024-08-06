@@ -1,6 +1,8 @@
 "use server";
 
-import { SECURE_GET } from "./request";
+import { revalidatePath } from "next/cache";
+import { SECURE_GET, SECURE_POST } from "./request";
+import { redirect } from "next/navigation";
 
 export async function getAllUser(
   currentPage: string = "1",
@@ -13,4 +15,11 @@ export async function getAllUser(
   );
   if (!result.success) throw new Error(result.message);
   return result.data;
+}
+
+export async function createNewUser(formData: FormData) {
+  const result = await SECURE_POST("/users", formData);
+  if (!result.success) throw new Error(result.message);
+  revalidatePath("/dashboard/user");
+  redirect("/dashboard/user");
 }

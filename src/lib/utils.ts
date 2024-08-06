@@ -66,3 +66,31 @@ export function dateToString(date: string) {
   const d = new Date(date);
   return `${d.getDate()}-${d.getMonth() + 1}-${d.getFullYear()}`;
 }
+
+export function generateRandomPassword(): string {
+  const upperCaseChars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+  const lowerCaseChars = "abcdefghijklmnopqrstuvwxyz";
+  const numberChars = "0123456789";
+  const symbolChars = "!@#$%&_?";
+  const allChars = upperCaseChars + lowerCaseChars + numberChars + symbolChars;
+
+  const getRandomChar = (chars: string): string =>
+    chars[Math.floor(Math.random() * chars.length)];
+
+  let password = [
+    getRandomChar(upperCaseChars),
+    getRandomChar(lowerCaseChars),
+    getRandomChar(numberChars),
+    getRandomChar(symbolChars),
+  ];
+
+  for (let i = password.length; i < 10; i++) {
+    password.push(getRandomChar(allChars));
+  }
+
+  // Shuffle the password array to ensure random order
+  password = password.sort(() => Math.random() - 0.5);
+
+  // return password.join("");
+  return "ChangeMe@123";
+}
