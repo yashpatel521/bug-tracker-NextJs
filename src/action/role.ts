@@ -1,7 +1,7 @@
 "use server";
 
 import { revalidatePath } from "next/cache";
-import { SECURE_GET, SECURE_POST } from "./request";
+import { SECURE_DELETE, SECURE_GET, SECURE_POST } from "./request";
 import { redirect } from "next/navigation";
 
 export async function getAllRole() {
@@ -21,6 +21,12 @@ export async function createNewRole(name: string) {
   redirect("/dashboard/role");
 }
 
+export async function deleteRole(id: number) {
+  const result = await SECURE_DELETE(`/roles/${id}`);
+  if (!result.success) throw new Error(result.message);
+  revalidatePath("/dashboard/role");
+}
+
 export async function getAllSubRole() {
   const result = await SECURE_GET("/subRoles");
   if (!result.success) throw new Error(result.message);
@@ -32,4 +38,10 @@ export async function createNewSubRole(name: string, roleId: number) {
   if (!result.success) throw new Error(result.message);
   revalidatePath(`/dashboard/role`);
   redirect(`/dashboard/role`);
+}
+
+export async function deleteSubRole(id: number) {
+  const result = await SECURE_DELETE(`/subRoles/${id}`);
+  if (!result.success) throw new Error(result.message);
+  revalidatePath("/dashboard/role");
 }

@@ -73,3 +73,27 @@ export async function SECURE_POST(
     };
   }
 }
+
+export async function SECURE_DELETE(url: string): Promise<ResponseType> {
+  const data = await getServerSession(authConfig);
+  const token = data?.user.accessToken;
+  const myHeaders = new Headers();
+  myHeaders.append("Authorization", `Bearer ${token}`);
+
+  try {
+    // Fetch request
+    const res = await fetch(`${BACKEND_URL}${url}`, {
+      method: "DELETE",
+      headers: myHeaders,
+    });
+    const data = await res.json();
+    return data;
+  } catch (error) {
+    console.error("Fetch error:", error);
+    return {
+      success: false,
+      message: "Failed to fetch data",
+      data: null,
+    };
+  }
+}

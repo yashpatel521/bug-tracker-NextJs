@@ -9,6 +9,7 @@ import {
   TableRow,
 } from "@/components/ui/table";
 import { Role } from "@/types";
+import { DeleteRoleDialog } from "./DeleteDialog";
 const RoleTable = async () => {
   const rolesData = await getAllRole();
   return (
@@ -19,6 +20,7 @@ const RoleTable = async () => {
             <TableHead className="text-center">Index</TableHead>
             <TableHead>Roles</TableHead>
             <TableHead className="text-center">Created At</TableHead>
+            <TableHead className="text-center">Action</TableHead>
           </TableRow>
         </TableHeader>
         <TableBody>
@@ -32,6 +34,9 @@ const RoleTable = async () => {
               </TableCell>
               <TableCell className="capitalize text-center">
                 {new Date(item.createdAt).toLocaleString()}
+              </TableCell>
+              <TableCell className="flex justify-center align-middle py-0 items-center cursor-pointer">
+                <DeleteRoleDialog id={+item.id} type="role" />
               </TableCell>
             </TableRow>
           ))}

@@ -9,6 +9,7 @@ import {
   TableRow,
 } from "@/components/ui/table";
 import { SubRole } from "@/types";
+import { DeleteRoleDialog } from "./DeleteDialog";
 const SubRoleTable = async () => {
   const subRolesData = await getAllSubRole();
   return (
@@ -20,6 +21,7 @@ const SubRoleTable = async () => {
             <TableHead>Roles</TableHead>
             <TableHead>Sub Roles</TableHead>
             <TableHead className="text-center">Created At</TableHead>
+            <TableHead className="text-center">Action</TableHead>
           </TableRow>
         </TableHeader>
         <TableBody>
@@ -36,6 +38,9 @@ const SubRoleTable = async () => {
               </TableCell>
               <TableCell className="capitalize text-center">
                 {new Date(item.createdAt).toLocaleString()}
+              </TableCell>
+              <TableCell className="flex justify-center align-middle  items-center cursor-pointer">
+                <DeleteRoleDialog id={+item.id} type="subRole" />
               </TableCell>
             </TableRow>
           ))}
