@@ -3,12 +3,16 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { useSearchParams, usePathname, useRouter } from "next/navigation";
 import { useDebouncedCallback } from "use-debounce";
-import { Icons } from "../ui/icons";
 import { checkRoleAccess } from "@/lib/utils";
 import { useSession } from "next-auth/react";
-import Link from "next/link";
 
-const UserSearchBar = ({ totalPages = 1 }: { totalPages: number }) => {
+const EditProjectMembers = ({
+  totalPages = 1,
+  handleAddMembers,
+}: {
+  totalPages: number;
+  handleAddMembers: () => void;
+}) => {
   const searchParams = useSearchParams();
   const pathname = usePathname();
   const { replace } = useRouter();
@@ -43,7 +47,6 @@ const UserSearchBar = ({ totalPages = 1 }: { totalPages: number }) => {
   };
 
   const currentPage = parseInt(searchParams?.get("currentPage") || "1", 10);
-  const AddIcon = Icons["UserPlus"];
   const { data: session } = useSession();
 
   return (
@@ -73,15 +76,9 @@ const UserSearchBar = ({ totalPages = 1 }: { totalPages: number }) => {
         >
           Next
         </Button>
-        {checkRoleAccess(session?.user, ["admin", "manager"]) && (
-          <Button className="text-xs md:text-sm  hover:bg-transparent bg-transparent">
-            <Link href="/dashboard/user/add">
-              <AddIcon
-                height="30"
-                width="30"
-                className="text-[var(--themeColor)]"
-              />
-            </Link>
+        {checkRoleAccess(session?.user, ["admin", "project_manager"]) && (
+          <Button className="text-xs md:text-sm" onClick={handleAddMembers}>
+            Update Members
           </Button>
         )}
       </div>
@@ -89,4 +86,4 @@ const UserSearchBar = ({ totalPages = 1 }: { totalPages: number }) => {
   );
 };
 
-export default UserSearchBar;
+export default EditProjectMembers;

@@ -57,3 +57,15 @@ export async function deleteVersion(formData: FormData) {
   if (!result.success) throw new Error(result.message);
   revalidatePath(`/dashboard/projects?view=versions`);
 }
+
+export async function updateProjectMember(
+  projectId: number,
+  userIds: string[]
+) {
+  const result = await SECURE_POST(`/projects/editUserToProject`, {
+    projectId,
+    userIds,
+  });
+  if (!result.success) throw new Error(result.message);
+  revalidatePath(`/dashboard/projects/${projectId}`);
+}
