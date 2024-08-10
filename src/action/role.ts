@@ -21,7 +21,8 @@ export async function createNewRole(name: string) {
   redirect("/dashboard/role");
 }
 
-export async function deleteRole(id: number) {
+export async function deleteRole(formdata: FormData) {
+  const id = formdata.get("id");
   const result = await SECURE_DELETE(`/roles/${id}`);
   if (!result.success) throw new Error(result.message);
   revalidatePath("/dashboard/role");
@@ -40,7 +41,8 @@ export async function createNewSubRole(name: string, roleId: number) {
   redirect(`/dashboard/role`);
 }
 
-export async function deleteSubRole(id: number) {
+export async function deleteSubRole(formdata: FormData) {
+  const id = formdata.get("id");
   const result = await SECURE_DELETE(`/subRoles/${id}`);
   if (!result.success) throw new Error(result.message);
   revalidatePath("/dashboard/role");

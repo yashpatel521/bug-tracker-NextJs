@@ -1,6 +1,6 @@
 "use server";
 import { revalidatePath } from "next/cache";
-import { SECURE_GET, SECURE_POST } from "./request";
+import { SECURE_DELETE, SECURE_GET, SECURE_POST } from "./request";
 import { redirect } from "next/navigation";
 
 export async function getAllProjectData(
@@ -46,5 +46,14 @@ export async function createNewVersion(formData: FormData) {
   const projectId = formData.get("projectId");
   if (!result.success) throw new Error(result.message);
   revalidatePath("/dashboard/projects");
-  redirect(`/dashboard/projects/${projectId}`);
+  redirect(`/dashboard/projects/${projectId}?view=versions`);
+}
+
+export async function deleteVersion(formData: FormData) {
+  // console.log(formData);
+  const result = await SECURE_DELETE(
+    `/projects/version/${formData.get("versionId")}`
+  );
+  if (!result.success) throw new Error(result.message);
+  revalidatePath(`/dashboard/projects?view=versions`);
 }

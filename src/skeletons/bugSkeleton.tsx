@@ -39,7 +39,7 @@ export default function BugSkeletonTable() {
           </TableRow>
         </TableHeader>
         <TableBody>
-          {Array.from({ length: 10 }, (_, index) => (
+          {Array.from({ length: 5 }, (_, index) => (
             <TableRow key={index}>
               <TableCell>
                 <div className="h-4 bg-gray-400 rounded animate-pulse"></div>

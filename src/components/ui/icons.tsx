@@ -32,6 +32,9 @@ import {
   UserX2Icon,
   FolderGit2,
   X,
+  Bot,
+  Gitlab,
+  Trash2,
 } from "lucide-react";
 
 export type IconType = LucideIcon;
@@ -62,6 +65,9 @@ export const Icons: any = {
   moon: Moon,
   laptop: Laptop,
   FolderGit2: FolderGit2,
+  bot: Bot,
+  gitlab: Gitlab,
+  trash2: Trash2,
   SecureTick: (props: IconProps) => (
     <svg
       xmlns="http://www.w3.org/2000/svg"

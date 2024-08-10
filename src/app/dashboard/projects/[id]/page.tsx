@@ -14,6 +14,8 @@ import ProjectTeamMemberTable from "@/components/projects/ProjectTeamMemberTable
 import ProjectVersionHistoryTable from "@/components/projects/ProjectVersionHistoryTable";
 import ProjectBugTable from "@/components/projects/Bug/BugTable";
 import BugSkeletonTable from "@/skeletons/bugSkeleton";
+import AddSearchParams from "@/components/ui/addSearchParams";
+import { ProjectDetails } from "@/types";
 
 const ProjectDeatilsPage = async ({
   params,
@@ -28,9 +30,10 @@ const ProjectDeatilsPage = async ({
     sortBy?: string;
     sortOrder?: string;
     versionId?: string;
+    view?: string;
   };
 }) => {
-  const projectData = await getProjectDetailsData(+params.id);
+  const projectData: ProjectDetails = await getProjectDetailsData(+params.id);
   const breadcrumbItems = [
     { title: "Projects", link: `/dashboard/projects` },
     {
@@ -44,13 +47,14 @@ const ProjectDeatilsPage = async ({
         <BreadCrumb items={breadcrumbItems} />
       </Suspense>
       <Separator className="mb-1" />
-      <Tabs defaultValue="info" className="w-full mt-2">
+      <Tabs defaultValue={searchParams.view ?? "info"} className="w-full mt-2">
         <TabsList className="grid w-full grid-cols-3">
           <TabsTrigger value="info">Details</TabsTrigger>
           <TabsTrigger value="bugs">Bugs</TabsTrigger>
           <TabsTrigger value="versions">Versions</TabsTrigger>
         </TabsList>
         <TabsContent value="info">
+          <AddSearchParams type="view" value="info" />
           <div className="py-5">
             <Suspense fallback={<ProjectHeaderSkeleton />}>
               <ProjectHeader appData={projectData} />
@@ -93,6 +97,7 @@ const ProjectDeatilsPage = async ({
             fallback={<BugSkeletonTable />}
             key={JSON.stringify(searchParams)}
           >
+            <AddSearchParams type="view" value="bugs" />
             <ProjectBugTable
               projectData={projectData}
               searchParams={searchParams}
@@ -101,6 +106,8 @@ const ProjectDeatilsPage = async ({
           </Suspense>
         </TabsContent>
         <TabsContent value="versions">
+          <AddSearchParams type="view" value="versions" />
+
           <ProjectVersionHistoryTable
             versions={projectData.versions ?? []}
             projectId={projectData.id}

@@ -1,4 +1,4 @@
-import { getAllRole } from "@/action/role";
+import { deleteRole, getAllRole } from "@/action/role";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import {
   Table,
@@ -9,9 +9,19 @@ import {
   TableRow,
 } from "@/components/ui/table";
 import { Role } from "@/types";
-import { DeleteRoleDialog } from "./DeleteDialog";
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from "@/components/ui/dialog";
+import { Button } from "../ui/button";
+import { Icons } from "../ui/icons";
 const RoleTable = async () => {
   const rolesData = await getAllRole();
+  const Trash2Icon = Icons["trash2"];
   return (
     <ScrollArea className="h-full max-h-96 w-full">
       <Table className="p-0 m-0 border">
@@ -36,7 +46,25 @@ const RoleTable = async () => {
                 {new Date(item.createdAt).toLocaleString()}
               </TableCell>
               <TableCell className="flex justify-center align-middle py-0 items-center cursor-pointer">
-                <DeleteRoleDialog id={+item.id} type="role" />
+                <Dialog>
+                  <DialogTrigger asChild>
+                    <Trash2Icon className=" text-red-600 mx-auto" />
+                  </DialogTrigger>
+                  <DialogContent className="sm:max-w-md">
+                    <DialogHeader>
+                      <DialogTitle>Delete</DialogTitle>
+                      <DialogDescription>
+                        Are you sure you want to delete the Role ?
+                      </DialogDescription>
+                    </DialogHeader>
+                    <form action={deleteRole}>
+                      <input type="hidden" name="versionId" value={item.id} />
+                      <Button type="submit" variant="destructive">
+                        Delete
+                      </Button>
+                    </form>
+                  </DialogContent>
+                </Dialog>
               </TableCell>
             </TableRow>
           ))}

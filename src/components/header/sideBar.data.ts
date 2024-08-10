@@ -29,6 +29,13 @@ export const navItemsData: NavItem[] = [
     label: "Role",
     access: ["admin"],
   },
+  {
+    title: "Track Live Project",
+    href: "/dashboard/liveProject",
+    icon: "gitlab",
+    label: "liveProject",
+    access: ["all"],
+  },
 ];
 
 export const navItems = (user: User) => {

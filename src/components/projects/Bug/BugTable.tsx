@@ -33,17 +33,25 @@ const BugTable = async ({
     versionId?: string;
   };
 }) => {
-  const versionId = searchParams.versionId || projectData.versions?.[0].id;
-  if (!versionId) return null;
-
-  const bugsData = await getProjectBugsData(
-    projectData.id,
-    +versionId,
-    searchParams.query,
-    searchParams.currentPage,
-    searchParams.sortBy,
-    searchParams.sortOrder
-  );
+  let versionId = searchParams.versionId;
+  if (
+    projectData.versions &&
+    projectData.versions.length &&
+    projectData.versions?.[0].id
+  )
+    versionId = projectData.versions?.[0].id.toString();
+  else versionId = "0";
+  let bugsData;
+  if (versionId) {
+    bugsData = await getProjectBugsData(
+      projectData.id,
+      +versionId,
+      searchParams.query,
+      searchParams.currentPage,
+      searchParams.sortBy,
+      searchParams.sortOrder
+    );
+  }
   return (
     <div>
       <BugTableHeader
@@ -71,6 +79,13 @@ const BugTable = async ({
           </TableRow>
         </TableHeader>
         <TableBody>
+          {bugsData.bugs.length === 0 && (
+            <TableRow>
+              <TableCell colSpan={7} className="text-center text-gray-500">
+                No bugs found.
+              </TableCell>
+            </TableRow>
+          )}
           {bugsData.bugs.map((bug: Bug) => (
             <TableRow key={bug.id}>
               <TableCell>

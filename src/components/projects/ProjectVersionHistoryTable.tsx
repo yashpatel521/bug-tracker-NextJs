@@ -15,6 +15,16 @@ import { Icons } from "@/components/ui/icons";
 import { Version } from "@/types";
 import { dateToString, getInitials } from "@/lib/utils";
 import Link from "next/link";
+import { deleteVersion } from "@/action/projects";
+import { Button } from "../ui/button";
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from "../ui/dialog";
 
 const ProjectVersionHistoryTable = ({
   versions,
@@ -25,6 +35,7 @@ const ProjectVersionHistoryTable = ({
 }) => {
   const VersionIcon = Icons["FilePlus"];
   const DownloadIcon = Icons["download"];
+  const Trash2Icon = Icons["trash2"];
   return (
     <div className="m-1 col-span-2">
       <Card>
@@ -40,7 +51,7 @@ const ProjectVersionHistoryTable = ({
           <Separator />
         </CardHeader>
         <CardContent className="">
-          <ScrollArea className="h-96 w-full">
+          <ScrollArea className="max-h-96 w-full ">
             <Table className="p-0 m-0">
               <TableHeader>
                 <TableRow>
@@ -49,9 +60,20 @@ const ProjectVersionHistoryTable = ({
                   <TableHead className="text-center">Version Name</TableHead>
                   <TableHead className="text-center">Release Date</TableHead>
                   <TableHead className="text-center">Download</TableHead>
+                  <TableHead className="text-center">Action</TableHead>
                 </TableRow>
               </TableHeader>
               <TableBody>
+                {versions.length === 0 && (
+                  <TableRow>
+                    <TableCell
+                      colSpan={6}
+                      className="text-center text-gray-500"
+                    >
+                      No versions found.
+                    </TableCell>
+                  </TableRow>
+                )}
                 {versions.map((version: Version, index) => (
                   <TableRow key={index}>
                     <TableCell className="capitalize text-center">
@@ -81,6 +103,33 @@ const ProjectVersionHistoryTable = ({
                       <a href={version.liveUrl} download target="_blank">
                         <DownloadIcon className="h-8 w-8" />
                       </a>
+                    </TableCell>
+                    <TableCell className="text-center">
+                      <Dialog>
+                        <DialogTrigger asChild>
+                          <Trash2Icon className=" text-red-600 mx-auto" />
+                        </DialogTrigger>
+                        <DialogContent className="sm:max-w-md">
+                          <DialogHeader>
+                            <DialogTitle>
+                              Delete {version.versionNumber} Version
+                            </DialogTitle>
+                            <DialogDescription>
+                              Are you sure you want to delete this version?
+                            </DialogDescription>
+                            <form action={deleteVersion}>
+                              <input
+                                type="hidden"
+                                name="versionId"
+                                value={version.id}
+                              />
+                              <Button type="submit" variant="destructive">
+                                Delete
+                              </Button>
+                            </form>
+                          </DialogHeader>
+                        </DialogContent>
+                      </Dialog>
                     </TableCell>
                   </TableRow>
                 ))}
