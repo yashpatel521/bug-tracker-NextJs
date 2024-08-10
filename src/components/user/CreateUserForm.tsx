@@ -12,9 +12,9 @@ import {
 import { Icons } from "@/components/ui/icons";
 import { Role, SubRole } from "@/types";
 import { Input } from "../ui/input";
-import { createNewUser } from "@/action/user";
 import { generateRandomPassword } from "@/lib/utils";
 import Image from "next/image";
+import { createNewUser } from "@/action/user";
 const CreateUserForm = ({
   roles,
   subRoles,

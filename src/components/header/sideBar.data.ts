@@ -31,7 +31,7 @@ export const navItemsData: NavItem[] = [
   },
   {
     title: "Track Live Project",
-    href: "/dashboard/liveProject",
+    href: "/dashboard/trackliveProject",
     icon: "gitlab",
     label: "liveProject",
     access: ["all"],

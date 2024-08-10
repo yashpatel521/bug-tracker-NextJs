@@ -3,7 +3,6 @@ import BreadCrumb from "@/components/ui/breadcrumb";
 import { Separator } from "@/components/ui/separator";
 import UserSearchBar from "@/components/user/UserSearchBar";
 import UserTable from "@/components/user/UserTable";
-import BreadCrumbSkeleton from "@/skeletons/BreadcrumbSkeleton";
 import UserSearchBarSkeleton from "@/skeletons/UserSearchBarSkeleton";
 import UserTableSkeleton from "@/skeletons/UserTableSkeleton";
 import React, { Suspense } from "react";

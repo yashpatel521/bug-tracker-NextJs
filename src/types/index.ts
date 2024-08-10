@@ -88,6 +88,8 @@ export interface ProjectDetails {
   ratings: number;
   reviews: number;
   isPinned: boolean;
+  icon: string;
+  url: string;
 }
 
 export interface DailyStats {
