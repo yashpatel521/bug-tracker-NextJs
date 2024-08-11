@@ -44,45 +44,51 @@ const ProjectTeamMemberTable = async ({
           <Separator />
         </CardHeader>
         <CardContent className="">
-          <ScrollArea className="h-96 w-full">
-            <Table className="p-0 m-0">
-              <TableHeader>
-                <TableRow>
-                  <TableHead className="text-center">Index</TableHead>
-                  <TableHead className="">Name</TableHead>
-                  <TableHead className="text-center">Email</TableHead>
-                  <TableHead className="text-center">Role</TableHead>
-                </TableRow>
-              </TableHeader>
-              <TableBody>
-                {teamMember.map((member, index) => (
-                  <TableRow key={member.id}>
-                    <TableCell className="capitalize text-center">
-                      {++index}
-                    </TableCell>
-                    <TableCell className="text-center font-medium flex items-center align-middle gap-2 capitalize">
-                      <Avatar className="h-6 w-6 my-2 ">
-                        <AvatarImage src={member.user.profile} alt="Avatar" />
-                        <AvatarFallback>
-                          {getInitials(
-                            member.user.firstName,
-                            member.user.lastName
-                          )}
-                        </AvatarFallback>
-                      </Avatar>
-                      {member.user.firstName} {member.user.lastName}
-                    </TableCell>
-                    <TableCell className="capitalize text-center">
-                      {member.user.email}
-                    </TableCell>
-                    <TableCell className="capitalize text-center">
-                      {member.user.subRole?.name}
-                    </TableCell>
+          {teamMember.length === 0 ? (
+            <div className="text-center text-gray-400">
+              No team members found
+            </div>
+          ) : (
+            <ScrollArea className="h-96 w-full">
+              <Table className="p-0 m-0">
+                <TableHeader>
+                  <TableRow>
+                    <TableHead className="text-center">Index</TableHead>
+                    <TableHead className="">Name</TableHead>
+                    <TableHead className="text-center">Email</TableHead>
+                    <TableHead className="text-center">Role</TableHead>
                   </TableRow>
-                ))}
-              </TableBody>
-            </Table>
-          </ScrollArea>
+                </TableHeader>
+                <TableBody>
+                  {teamMember.map((member, index) => (
+                    <TableRow key={member.id}>
+                      <TableCell className="capitalize text-center">
+                        {++index}
+                      </TableCell>
+                      <TableCell className="text-center font-medium flex items-center align-middle gap-2 capitalize">
+                        <Avatar className="h-6 w-6 my-2 ">
+                          <AvatarImage src={member.user.profile} alt="Avatar" />
+                          <AvatarFallback>
+                            {getInitials(
+                              member.user.firstName,
+                              member.user.lastName
+                            )}
+                          </AvatarFallback>
+                        </Avatar>
+                        {member.user.firstName} {member.user.lastName}
+                      </TableCell>
+                      <TableCell className="capitalize text-center">
+                        {member.user.email}
+                      </TableCell>
+                      <TableCell className="capitalize text-center">
+                        {member.user.subRole?.name}
+                      </TableCell>
+                    </TableRow>
+                  ))}
+                </TableBody>
+              </Table>
+            </ScrollArea>
+          )}
         </CardContent>
       </Card>
     </div>

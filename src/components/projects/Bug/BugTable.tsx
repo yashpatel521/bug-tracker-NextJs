@@ -76,6 +76,7 @@ const BugTable = async ({
             </TableHead>
             <TableHead className="text-center">Created By</TableHead>
             <TableHead className="text-center">Assigned To</TableHead>
+            <TableHead className="text-center">Action</TableHead>
           </TableRow>
         </TableHeader>
         <TableBody>
@@ -86,11 +87,9 @@ const BugTable = async ({
               </TableCell>
             </TableRow>
           )}
-          {bugsData.bugs.map((bug: Bug) => (
+          {bugsData.bugs.map((bug: Bug, i: number) => (
             <TableRow key={bug.id}>
-              <TableCell>
-                <BugSheet id={bug.id} userProjects={userProjects} />
-              </TableCell>
+              <TableCell>{++i}</TableCell>
 
               <TableCell>
                 <div className="flex">
@@ -127,6 +126,9 @@ const BugTable = async ({
                 <div className="flex align-middle justify-center">
                   <AvatarList avatarList={bug.assignedTo ?? []} />
                 </div>
+              </TableCell>
+              <TableCell className="mx-auto flex  justify-center my-0">
+                <BugSheet id={bug.id} userProjects={userProjects} />
               </TableCell>
             </TableRow>
           ))}

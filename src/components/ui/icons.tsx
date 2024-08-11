@@ -36,6 +36,7 @@ import {
   Gitlab,
   Trash2,
   BookmarkPlus,
+  CircleX,
 } from "lucide-react";
 
 export type IconType = LucideIcon;
@@ -70,6 +71,7 @@ export const Icons: any = {
   gitlab: Gitlab,
   trash2: Trash2,
   bookmarkPlus: BookmarkPlus,
+  CrossCircle: CircleX,
   SecureTick: (props: IconProps) => (
     <svg
       xmlns="http://www.w3.org/2000/svg"
@@ -232,20 +234,6 @@ export const Icons: any = {
       <path
         fill="var(--themeColor)"
         d="M22 10.5h-6m-2.25-4.125a3.375 3.375 0 1 1-6.75 0 3.375 3.375 0 0 1 6.75 0ZM4 19.235v-.11a6.375 6.375 0 0 1 12.75 0v.109A12.318 12.318 0 0 1 10.374 21c-2.331 0-4.512-.645-6.374-1.766Z"
-      />
-    </svg>
-  ),
-  CrossCircle: (props: IconProps) => (
-    <svg
-      xmlns="http://www.w3.org/2000/svg"
-      height="20"
-      width="20"
-      viewBox="0 0 512 512"
-      {...props}
-    >
-      <path
-        fill="var(--themeColor)"
-        d="M256 48a208 208 0 1 1 0 416 208 208 0 1 1 0-416zm0 464A256 256 0 1 0 256 0a256 256 0 1 0 0 512zM175 175c-9.4 9.4-9.4 24.6 0 33.9l47 47-47 47c-9.4 9.4-9.4 24.6 0 33.9s24.6 9.4 33.9 0l47-47 47 47c9.4 9.4 24.6 9.4 33.9 0s9.4-24.6 0-33.9l-47-47 47-47c9.4-9.4 9.4-24.6 0-33.9s-24.6-9.4-33.9 0l-47 47-47-47c-9.4-9.4-24.6-9.4-33.9 0z"
       />
     </svg>
   ),

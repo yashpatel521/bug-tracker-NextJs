@@ -1,4 +1,3 @@
-import ImageViewer from "@/components/ui/imageViewer";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import {
@@ -20,8 +19,10 @@ import {
 } from "@/types";
 import React, { useState } from "react";
 import MultiSelect from "./multiSelect";
-import { SheetClose, SheetFooter } from "@/components/ui/sheet";
 import { Button } from "@/components/ui/button";
+import { updateBug } from "@/action/bug";
+import BugImageHandle from "./BugImageHandle";
+import { customToast } from "@/lib/utils";
 
 const BugDetailsForm = ({
   bugData,
@@ -30,14 +31,23 @@ const BugDetailsForm = ({
   bugData: Bug;
   userProjects: UserProject[];
 }) => {
-  const [updatedData, setUpdatedData] = useState({
+  const [loading, setLoading] = useState(false);
+  const [updatedData, setUpdatedData] = useState<{
+    id: number;
+    title: string;
+    description: string;
+    assignedTo: User[];
+    priority: string;
+    status: string;
+    type: string;
+  }>({
+    id: bugData.id,
     title: bugData.title,
     description: bugData.description,
     assignedTo: bugData.assignedTo,
     priority: bugData.priority,
     status: bugData.status,
     type: bugData.type,
-    images: bugData.images.map((i) => i.src),
   });
   const handleInputChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
@@ -52,24 +62,30 @@ const BugDetailsForm = ({
       [name]: value as any,
     });
   };
-  //   console.log(bugData);
 
-  const onImageUpload = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const files = event.target.files;
-    if (files) {
-      const newImages = Array.from(files).map((file) =>
-        URL.createObjectURL(file)
-      );
-      setUpdatedData({
-        ...updatedData,
-        images: updatedData.images.concat(newImages),
-      });
-    }
-  };
   const handleUserSelect = (selectedUsers: User[]) => {
     setUpdatedData({ ...updatedData, assignedTo: selectedUsers });
   };
-  console.log(updatedData);
+
+  const handleSubmit = async () => {
+    setLoading(true);
+    const formData = new FormData();
+    formData.append("id", updatedData.id.toString());
+    formData.append("title", updatedData.title);
+    formData.append("description", updatedData.description);
+    formData.append("priority", updatedData.priority);
+    formData.append("status", updatedData.status);
+    formData.append("type", updatedData.type);
+    formData.append("assignedTo", JSON.stringify(updatedData.assignedTo));
+    try {
+      await updateBug(formData);
+      customToast("Bug updated successfully", "success");
+    } catch (error: any) {
+      customToast(error.message, "error");
+    } finally {
+      setLoading(false);
+    }
+  };
 
   return (
     <div className="mt-3 mb-4">
@@ -182,28 +198,16 @@ const BugDetailsForm = ({
           </div>
         </div>
       </div>
-      <Label className="block text-sm font-medium mt-3">Attachments</Label>
-      <div className="mt-1 ml-2">
-        <Input
-          type="file"
-          placeholder="Attachments"
-          multiple
-          onChange={onImageUpload}
-        />
-        <ImageViewer images={updatedData.images} />
-      </div>
-      <SheetFooter className="flex justify-end border-t mt-4 pt-4">
-        <SheetClose asChild>
-          <Button
-            type="button"
-            variant="ghost"
-            className="border"
-            //   onClick={handleUpdateBug}
-          >
-            Update Bug
-          </Button>
-        </SheetClose>
-      </SheetFooter>
+      <BugImageHandle bugData={bugData} />
+      <Button
+        type="button"
+        variant="ghost"
+        className="border mt-5 bg-teal-400"
+        onClick={handleSubmit}
+        disabled={loading}
+      >
+        {loading ? "Saving..." : "Save Changes"}
+      </Button>
     </div>
   );
 };

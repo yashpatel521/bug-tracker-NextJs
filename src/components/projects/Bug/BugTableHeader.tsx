@@ -29,9 +29,9 @@ const BugTableHeader = ({
   const searchParams = useSearchParams();
   const pathname = usePathname();
   const { replace } = useRouter();
+  const params = new URLSearchParams(searchParams ?? "");
 
   const handleSearch = useDebouncedCallback((term) => {
-    const params = new URLSearchParams(searchParams ?? "");
     params.set("currentPage", "1");
     if (term) {
       params.set("query", term);
@@ -42,14 +42,12 @@ const BugTableHeader = ({
   }, 300);
 
   const handleVersionSelect = (versionId: string) => {
-    const params = new URLSearchParams(searchParams ?? "");
     params.set("versionId", versionId);
     params.set("currentPage", "1");
     replace(`${pathname}?${params.toString()}`);
   };
 
   const handlePrevious = () => {
-    const params = new URLSearchParams(searchParams || "");
     const page = parseInt(params.get("currentPage") || "1", 10);
     if (page > 1) {
       params.set("currentPage", (page - 1).toString());
@@ -67,6 +65,8 @@ const BugTableHeader = ({
   };
 
   const currentPage = parseInt(searchParams?.get("currentPage") || "1", 10);
+  params.set("view", "bugs");
+  replace(`${pathname}?${params.toString()}`);
 
   return (
     <div className="flex items-center justify-between">

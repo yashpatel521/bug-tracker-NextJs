@@ -24,34 +24,42 @@ const ProjectHistoryTable = ({ history }: { history: DailyStats[] }) => {
           <Separator />
         </CardHeader>
         <CardContent className="">
-          <ScrollArea className="h-96 w-full">
-            <Table className="p-0 m-0">
-              <TableHeader>
-                <TableRow>
-                  <TableHead className="text-center">Date</TableHead>
-                  <TableHead className="text-center">Installs</TableHead>
-                  <TableHead className="text-center">Rating</TableHead>
-                  <TableHead className="text-center">Reviews</TableHead>
-                </TableRow>
-              </TableHeader>
-              <TableBody>
-                {history.map((item) => (
-                  <TableRow key={item.id}>
-                    <TableCell className=" text-center">{item.date}</TableCell>
-                    <TableCell className="text-center ">
-                      {item.installCount}
-                    </TableCell>
-                    <TableCell className="text-center ">
-                      {item.ratingCount}
-                    </TableCell>
-                    <TableCell className="text-center">
-                      {item.reviewCount}
-                    </TableCell>
+          {history.length === 0 ? (
+            <p className="text-center text-gray-500">
+              No history data available.
+            </p>
+          ) : (
+            <ScrollArea className="h-96 w-full">
+              <Table className="p-0 m-0">
+                <TableHeader>
+                  <TableRow>
+                    <TableHead className="text-center">Date</TableHead>
+                    <TableHead className="text-center">Installs</TableHead>
+                    <TableHead className="text-center">Rating</TableHead>
+                    <TableHead className="text-center">Reviews</TableHead>
                   </TableRow>
-                ))}
-              </TableBody>
-            </Table>
-          </ScrollArea>
+                </TableHeader>
+                <TableBody>
+                  {history.map((item) => (
+                    <TableRow key={item.id}>
+                      <TableCell className=" text-center">
+                        {item.date}
+                      </TableCell>
+                      <TableCell className="text-center ">
+                        {item.installCount}
+                      </TableCell>
+                      <TableCell className="text-center ">
+                        {item.ratingCount}
+                      </TableCell>
+                      <TableCell className="text-center">
+                        {item.reviewCount}
+                      </TableCell>
+                    </TableRow>
+                  ))}
+                </TableBody>
+              </Table>
+            </ScrollArea>
+          )}
         </CardContent>
       </Card>
     </div>

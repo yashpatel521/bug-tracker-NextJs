@@ -43,10 +43,10 @@ const BugSheet = ({
       <SheetTrigger asChild>
         <Button
           variant="ghost"
-          className="hover:bg-transparent focus:outline-none focus:ring-2 focus:ring-offset-2"
+          className="bg-teal-400 mx-auto"
           aria-label={`View details for bug ${id}`}
         >
-          {id}
+          Edit
         </Button>
       </SheetTrigger>
       <SheetContent

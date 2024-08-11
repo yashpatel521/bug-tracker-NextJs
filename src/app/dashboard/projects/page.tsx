@@ -2,7 +2,6 @@ import { getAllProjectData } from "@/action/projects";
 import ProjectGridView from "@/components/projects/ProjectGridView";
 import ProjectSearchBar from "@/components/projects/ProjectSearchBar";
 import ProjectTableView from "@/components/projects/ProjectTableView";
-import AddSearchParams from "@/components/ui/addSearchParams";
 import BreadCrumb from "@/components/ui/breadcrumb";
 import { Separator } from "@/components/ui/separator";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
@@ -40,13 +39,11 @@ const ProjectPage = async ({
           <ProjectSearchBar totalPages={+projectsData.totalPages} />
         </Suspense>
         <TabsContent value="gridView">
-          <AddSearchParams type="view" value="gridView" />
           <Suspense fallback={<ProjectGridViewSkeleton />}>
             <ProjectGridView data={projectsData.result} />
           </Suspense>
         </TabsContent>
         <TabsContent value="listView">
-          <AddSearchParams type="view" value="listView" />
           <ProjectTableView data={projectsData.result} />
         </TabsContent>
       </Tabs>
