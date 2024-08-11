@@ -3,8 +3,6 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { useSearchParams, usePathname, useRouter } from "next/navigation";
 import { useDebouncedCallback } from "use-debounce";
-import { useEffect, useState } from "react";
-import { checkRoleAccess } from "@/lib/utils";
 import { Icons } from "@/components/ui/icons";
 import { Version } from "@/types";
 import {
@@ -117,7 +115,7 @@ const BugTableHeader = ({
           Next
         </Button>
         <Button className="text-xs md:text-sm hover:bg-transparent bg-transparent">
-          <Link href={`${pathname}/add`}>
+          <Link href={`${pathname}/addBug`}>
             <CubeIcon
               height="30"
               width="30"

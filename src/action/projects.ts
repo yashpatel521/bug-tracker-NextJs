@@ -85,3 +85,17 @@ export async function updateProject(formData: FormData) {
   revalidatePath(`/dashboard/projects/${formData.get("id")}`);
   redirect(`/dashboard/projects/${formData.get("id")}`);
 }
+
+export async function memberInProject(projectId: number) {
+  const result = await SECURE_GET(
+    `/projects/projectDetails/${projectId}/memberInProject`
+  );
+  if (!result.success) throw new Error(result.message);
+  return result.data;
+}
+
+export async function getVersions(projectId: number) {
+  const result = await SECURE_GET(`/projects/getVersions/${projectId}`);
+  if (!result.success) throw new Error(result.message);
+  return result.data;
+}

@@ -1,6 +1,7 @@
 "use server";
 import { revalidatePath } from "next/cache";
 import { SECURE_DELETE, SECURE_GET, SECURE_POST } from "./request";
+import { redirect } from "next/navigation";
 
 export async function getBugDetailsData(id: number) {
   const result = await SECURE_GET(`/projects/bugs/${id}`);
@@ -27,4 +28,11 @@ export async function deleteBugImage(imageId: number) {
   const result = await SECURE_DELETE(`/projects/bugs/image/${imageId}`);
   if (!result.success) throw new Error(result.message);
   return result.data;
+}
+export async function createBug(formData: FormData) {
+  console.log(formData);
+  const result = await SECURE_POST("/projects/bugs", formData);
+  if (!result.success) throw new Error(result.message);
+  revalidatePath(`/dashboard/projects/${formData.get("projectId")}?view=bugs`);
+  redirect(`/dashboard/projects/${formData.get("projectId")}?view=bugs`);
 }
