@@ -69,3 +69,9 @@ export async function updateProjectMember(
   if (!result.success) throw new Error(result.message);
   revalidatePath(`/dashboard/projects/${projectId}`);
 }
+
+export async function createNewProject(formData: FormData) {
+  const result = await SECURE_POST("/projects", formData);
+  if (!result.success) throw new Error(result.message);
+  redirect(`/dashboard/projects/${result.data.id}`);
+}
