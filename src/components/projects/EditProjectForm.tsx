@@ -1,3 +1,4 @@
+import { ProjectDetails } from "@/types";
 import React from "react";
 import {
   Select,
@@ -10,15 +11,14 @@ import {
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
-import { createNewProject } from "@/action/projects";
-const CreateProjectForm = () => {
+import { updateProject } from "@/action/projects";
+
+const EditProjectForm = ({ projectData }: { projectData: ProjectDetails }) => {
   return (
     <div className="flex flex-col">
       <div className="p-6 rounded-lg shadow-lg w-full">
-        <h2 className="text-2xl font-bold mb-6 text-left border-b-2 pb-2">
-          Add New Project
-        </h2>
-        <form action={createNewProject}>
+        <form action={updateProject}>
+          <Input type="hidden" name="id" defaultValue={projectData.id} />
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4 items-center">
             <div className="mb-4">
               <label htmlFor="title" className="block font-medium text-md">
@@ -29,6 +29,7 @@ const CreateProjectForm = () => {
                 id="title"
                 name="title"
                 placeholder="Enter title"
+                defaultValue={projectData.title}
                 required
               />
             </div>
@@ -42,6 +43,8 @@ const CreateProjectForm = () => {
                 id="appId"
                 name="appId"
                 placeholder="Enter app ID"
+                defaultValue={projectData.appId}
+                disabled
               />
             </div>
             <div className="mb-4">
@@ -56,6 +59,7 @@ const CreateProjectForm = () => {
                 id="developerId"
                 name="developerId"
                 placeholder="Enter developer ID"
+                defaultValue={projectData.developerId}
               />
             </div>
             <div className="mb-4">
@@ -70,6 +74,7 @@ const CreateProjectForm = () => {
                 id="repositoryUrl"
                 name="repositoryUrl"
                 placeholder="Enter repository URL"
+                defaultValue={projectData.repositoryUrl}
               />
             </div>
             <div className="mb-4">
@@ -84,6 +89,7 @@ const CreateProjectForm = () => {
                 id="firebaseAccount"
                 name="firebaseAccount"
                 placeholder="Enter firebase account"
+                defaultValue={projectData.firebaseAccount}
               />
             </div>
             <div className="mb-4">
@@ -95,6 +101,7 @@ const CreateProjectForm = () => {
                 id="developer"
                 name="developer"
                 placeholder="Enter Developer"
+                defaultValue={projectData.developer}
               />
             </div>
             <div className="mb-4">
@@ -109,6 +116,7 @@ const CreateProjectForm = () => {
                 id="developerEmail"
                 name="developerEmail"
                 placeholder="Enter Developer Email"
+                defaultValue={projectData.developerEmail}
               />
             </div>
             <div className="mb-4">
@@ -120,6 +128,7 @@ const CreateProjectForm = () => {
                 id="appUrl"
                 name="appUrl"
                 placeholder="Enter App Url"
+                defaultValue={projectData.appUrl}
               />
             </div>
             <div className="mb-4">
@@ -134,13 +143,14 @@ const CreateProjectForm = () => {
                 id="privacyPolicyUrl"
                 name="privacyPolicyUrl"
                 placeholder="Enter App Url"
+                defaultValue={projectData.privacyPolicyUrl}
               />
             </div>
             <div className="mb-4">
               <label htmlFor="status" className="block font-medium text-md">
                 Status:
               </label>
-              <Select name="status" defaultValue="inprogress">
+              <Select name="status" defaultValue={projectData.status}>
                 <SelectTrigger className="w-full">
                   <SelectValue placeholder="Select Status" />
                 </SelectTrigger>
@@ -166,7 +176,7 @@ const CreateProjectForm = () => {
               <label htmlFor="appType" className="block font-medium text-md">
                 App Type:
               </label>
-              <Select name="appType" defaultValue="google">
+              <Select name="appType" defaultValue={projectData.appType}>
                 <SelectTrigger className="w-full">
                   <SelectValue placeholder="Select Type" />
                 </SelectTrigger>
@@ -208,6 +218,21 @@ const CreateProjectForm = () => {
                 id="description"
                 name="description"
                 placeholder="Enter project description"
+                defaultValue={projectData.description}
+              />
+            </div>
+            <div className="mb-4 col-span-2">
+              <label
+                htmlFor="description"
+                className="block font-medium text-md"
+              >
+                Description Html:
+              </label>
+              <Textarea
+                id="descriptionHTML"
+                name="descriptionHTML"
+                placeholder="Enter project description Html"
+                defaultValue={projectData.descriptionHTML}
               />
             </div>
           </div>
@@ -216,7 +241,7 @@ const CreateProjectForm = () => {
             type="submit"
             className="w-full py-2 px-4 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2"
           >
-            Add Project
+            Update Project
           </Button>
         </form>
       </div>
@@ -224,4 +249,4 @@ const CreateProjectForm = () => {
   );
 };
 
-export default CreateProjectForm;
+export default EditProjectForm;

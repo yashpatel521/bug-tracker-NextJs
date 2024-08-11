@@ -90,6 +90,8 @@ export interface ProjectDetails {
   isPinned: boolean;
   icon: string;
   url: string;
+  repositoryUrl: string;
+  appType: "google" | "apple" | "web";
 }
 
 export interface DailyStats {

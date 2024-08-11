@@ -5,6 +5,7 @@ import { Icons } from "@/components/ui/icons";
 import ProjectBadge from "../ui/projectBadge";
 import { abbreviateNumber } from "@/lib/utils";
 import TogglePinProjectButton from "../TogglePinProjectButton";
+import { Button } from "../ui/button";
 
 const ProjectHeader = ({ appData }: { appData: ProjectDetails }) => {
   const StarIcon = Icons["Star"];
@@ -54,6 +55,13 @@ const ProjectHeader = ({ appData }: { appData: ProjectDetails }) => {
             <div className="flex flex-col gap-1 text-[14px] justify-center items-center ">
               <p>{abbreviateNumber(+appData.reviews)}</p>
               <p className="text-gray-400">Reviews</p>
+            </div>
+            <div className="flex flex-col gap-1 text-[14px] justify-center items-center ">
+              <Link href={`./${appData.id}/edit`}>
+                <Button variant="ghost" className="bg-teal-400">
+                  Edit
+                </Button>
+              </Link>
             </div>
           </div>
         </div>
