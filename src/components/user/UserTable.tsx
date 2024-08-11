@@ -53,7 +53,13 @@ const UserTable = async ({ users }: { users: User[] }) => {
             <TableCell>{item.email}</TableCell>
             <TableCell>{item.role?.name}</TableCell>
             <TableCell>{item.subRole?.name}</TableCell>
-            <TableCell>{item.status}</TableCell>
+            <TableCell>
+              {item.status == "active" ? (
+                <span className="text-green-500">Active</span>
+              ) : (
+                <span className="text-red-500">In Active</span>
+              )}
+            </TableCell>
             <TableCell>{item.projectAssigned}</TableCell>
             <TableCell className="flex justify-center">
               <Link href={`./user/${item.id}`}>

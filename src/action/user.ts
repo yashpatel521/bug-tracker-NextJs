@@ -41,3 +41,10 @@ export async function updateUserPassword(
   if (!result.success) throw new Error(result.message);
   return result.data;
 }
+
+export async function updateUserProfile(formData: FormData) {
+  const result = await SECURE_POST("/users/updateProfile", formData);
+  if (!result.success) throw new Error(result.message);
+  revalidatePath(`/dashboard/user/${formData.get("id")}`);
+  return result.data;
+}
