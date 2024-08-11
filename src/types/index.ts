@@ -205,3 +205,21 @@ export const bugTypeArray = [
     label: "Enhancement",
   },
 ];
+
+export interface ProjectFilter {
+  id: number;
+  firstName: string;
+  lastName: string;
+  email: string;
+  profile: string;
+  password?: string;
+  status: string;
+  createdAt: string;
+  updatedAt: string;
+  role: Role;
+  subRole: SubRole;
+  projectCount: number;
+  versionCount: number;
+  pinnedProjectCount: number;
+  reportedBugCount: number;
+}

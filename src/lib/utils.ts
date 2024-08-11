@@ -106,3 +106,19 @@ export function newVersionNumber(versionNumber: string): string {
   const newVersion = versionParts.join(".");
   return newVersion;
 }
+
+export function passwordValidity(password: string) {
+  if (password.length < 8) {
+    return "Password must be at least 8 characters long";
+  } else if (!/[a-z]/.test(password)) {
+    return "Password must contain at least one lowercase letter";
+  } else if (!/[A-Z]/.test(password)) {
+    return "Password must contain at least one uppercase letter";
+  } else if (!/[0-9]/.test(password)) {
+    return "Password must contain at least one number";
+  } else if (!/[!@#$%^&*]/.test(password)) {
+    return "Password must contain at least one special character";
+  } else {
+    return "";
+  }
+}

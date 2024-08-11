@@ -23,3 +23,21 @@ export async function createNewUser(formData: FormData) {
   revalidatePath("/dashboard/user");
   redirect("/dashboard/user");
 }
+
+export async function getUserprofile(id: number) {
+  const result = await SECURE_GET(`/users/profile/${id}`);
+  if (!result.success) throw new Error(result.message);
+  return result.data;
+}
+
+export async function updateUserPassword(
+  oldPassword: string,
+  newPassword: string
+) {
+  const result = await SECURE_POST("/users/passwordChange", {
+    oldPassword,
+    newPassword,
+  });
+  if (!result.success) throw new Error(result.message);
+  return result.data;
+}
