@@ -36,6 +36,13 @@ export const navItemsData: NavItem[] = [
     label: "liveProject",
     access: ["all"],
   },
+  {
+    title: "Profile",
+    href: "/dashboard/user/profile",
+    icon: "user",
+    label: "Profile",
+    access: ["all"],
+  },
 ];
 
 export const navItems = (user: User) => {

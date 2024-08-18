@@ -25,7 +25,11 @@ const PinProjectTable = async () => {
         <CardContent>
           <div className="space-y-8">
             {pinProjects.map((item: PinProject, index: number) => {
-              return <PinProjectCard data={item.project} key={index} />;
+              return (
+                item.project && (
+                  <PinProjectCard data={item.project} key={index} />
+                )
+              );
             })}
           </div>
         </CardContent>
