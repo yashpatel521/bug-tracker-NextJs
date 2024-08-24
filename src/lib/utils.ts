@@ -122,3 +122,83 @@ export function passwordValidity(password: string) {
     return "";
   }
 }
+
+export function createBeams(totalNumberOfBeams: number = 20) {
+  // const beams = [];
+  // for (let i = 0; i < totalNumberOfBeams; i++) {
+  //   const randomClassName = `h-${Math.floor(Math.random() * 8) + 5}`;
+  //   const initialX = Math.floor(Math.random() * 8000); // Random initial position between -2000 and 6000
+  //   const randomDuration = Math.floor(Math.random() * 10) + 5; // Random duration between 5 and 15
+  //   const randomDelay = Math.floor(Math.random() * 5) + 1; // Random delay between 1 and 5
+  //   const randomRepeatDelay = Math.floor(Math.random() * 5) + 1; // Random repeat delay between 1 and 5
+  //   beams.push({
+  //     initialX: initialX,
+  //     translateX: initialX + 1800,
+  //     duration: randomDuration,
+  //     repeatDelay: randomRepeatDelay,
+  //     delay: randomDelay,
+  //     className: randomClassName,
+  //     rotate: 135,
+  //   });
+  // }
+  const beams = [
+    {
+      initialX: 10,
+      translateX: 10 + 1800,
+      duration: 7,
+      repeatDelay: 3,
+      delay: 2,
+      rotate: 135,
+    },
+    {
+      initialX: 600,
+      translateX: 600 + 1800,
+      duration: 3,
+      repeatDelay: 3,
+      rotate: 135,
+      delay: 4,
+    },
+    {
+      initialX: 100,
+      translateX: 100 + 1800,
+      duration: 7,
+      repeatDelay: 7,
+      className: "h-6",
+      rotate: 135,
+    },
+    {
+      initialX: 400,
+      translateX: 400 + 1800,
+      duration: 5,
+      repeatDelay: 14,
+      delay: 4,
+      rotate: 135,
+    },
+    {
+      initialX: 800,
+      translateX: 800 + 1800,
+      duration: 11,
+      repeatDelay: 2,
+      className: "h-20",
+      rotate: 135,
+    },
+    {
+      initialX: 1000,
+      translateX: 1000 + 1800,
+      duration: 4,
+      repeatDelay: 2,
+      className: "h-12",
+      rotate: 135,
+    },
+    {
+      initialX: 1200,
+      translateX: 1200 + 1800,
+      duration: 6,
+      repeatDelay: 4,
+      delay: 2,
+      className: "h-6",
+      rotate: 135,
+    },
+  ];
+  return beams;
+}

@@ -36,6 +36,8 @@
 
     /* --themeColor: #ffd43b; */
     --themeColor: #ecc014;
+    --themeGradientColor: #c45100;
+    --themeGradientColor2: #ff0000;
   }
 
   .dark {
