@@ -27,7 +27,7 @@ export interface User {
   lastName: string;
   email: string;
   profile: string;
-  password?: string;
+  password?: string | null;
   status: string;
   createdAt?: string;
   role: Role;

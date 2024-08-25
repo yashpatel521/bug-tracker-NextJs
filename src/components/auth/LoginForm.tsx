@@ -7,6 +7,7 @@ import { Input } from "../ui/input";
 import { Label } from "../ui/label";
 import { Button } from "../ui/button";
 import { Icons } from "../ui/icons";
+import GithubSignInButton from "./github-auth-button";
 interface UserAuthFormProps extends React.HTMLAttributes<HTMLDivElement> {}
 
 const LoginForm: React.FC<UserAuthFormProps> = ({ className, ...props }) => {
@@ -104,6 +105,7 @@ const LoginForm: React.FC<UserAuthFormProps> = ({ className, ...props }) => {
           </Button>
         </div>
       </form>
+      <GithubSignInButton />
     </div>
   );
 };

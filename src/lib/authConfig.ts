@@ -1,9 +1,29 @@
 import CredentialsProvider from "next-auth/providers/credentials";
 import { NextAuthOptions } from "next-auth";
-import { login } from "@/action/auth";
+import { login, providersAuth } from "@/action/auth";
+import GithubProvider from "next-auth/providers/github";
+import { GITHUB_ID, GITHUB_SECRET } from "./constants";
 
 export const authConfig: NextAuthOptions = {
   providers: [
+    GithubProvider({
+      clientId: GITHUB_ID,
+      clientSecret: GITHUB_SECRET,
+      async profile(profile) {
+        const response = await providersAuth(profile);
+
+        if (response.success === false) {
+          throw new Error("Error authenticating with Github");
+        }
+        const user = {
+          ...response.data.user,
+          accessToken: response.data.accessToken,
+          refreshToken: response.data.refreshToken,
+        };
+
+        return user;
+      },
+    }),
     CredentialsProvider({
       name: "Credentials",
       credentials: {
