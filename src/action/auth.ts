@@ -6,9 +6,6 @@ export const login = async (email: string, password: string) => {
 };
 
 export const providersAuth = async (providerData: any) => {
-  const result = await POST("/users/providersAuth", {
-    ...providerData,
-    providerType: "github",
-  });
+  const result = await POST("/users/providersAuth", providerData);
   return result;
 };

@@ -10,7 +10,13 @@ export const authConfig: NextAuthOptions = {
       clientId: GITHUB_ID,
       clientSecret: GITHUB_SECRET,
       async profile(profile) {
-        const response = await providersAuth(profile);
+        const userData = {
+          githubId: profile.id,
+          name: profile.name,
+          email: profile.email,
+          profile: profile.avatar_url,
+        };
+        const response = await providersAuth(userData);
 
         if (response.success === false) {
           throw new Error("Error authenticating with Github");
