@@ -109,7 +109,7 @@ const LoginForm: React.FC<UserAuthFormProps> = ({ className, ...props }) => {
       <div className="flex gap-2">
         <GithubSignInButton />
         <GoogleSignInButton />
-        <GoogleSignInButton />
+        {/* <GoogleSignInButton /> */}
       </div>
     </div>
   );
