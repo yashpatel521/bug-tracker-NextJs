@@ -6,7 +6,7 @@ import { Button } from "@/components/ui/button";
 import { Icons } from "@/components/ui/icons";
 import { useState } from "react";
 
-export default function GithubSignInButton() {
+export default function GoogleSignInButton() {
   const [error, setError] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const router = useRouter();
@@ -16,7 +16,7 @@ export default function GithubSignInButton() {
     setError(""); // Reset the error at the start of the function
 
     try {
-      const result = await signIn("github", {
+      const result = await signIn("google", {
         redirect: false,
         callbackUrl: "/dashboard",
       });
@@ -40,11 +40,11 @@ export default function GithubSignInButton() {
       disabled={isLoading}
     >
       {error && <div className="text-red-500 text-sm text-center">{error}</div>}
-      <Icons.gitHub className="mr-2 h-4 w-4" />
+      <Icons.google className="mr-2 h-4 w-4" />
       {isLoading ? (
         <Icons.spinner className="animate-spin h-4 w-4 ml-2" />
       ) : (
-        "Github"
+        "Google"
       )}
     </Button>
   );

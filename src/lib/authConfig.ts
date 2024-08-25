@@ -2,7 +2,13 @@ import CredentialsProvider from "next-auth/providers/credentials";
 import { NextAuthOptions } from "next-auth";
 import { login, providersAuth } from "@/action/auth";
 import GithubProvider from "next-auth/providers/github";
-import { GITHUB_ID, GITHUB_SECRET } from "./constants";
+import {
+  GITHUB_ID,
+  GITHUB_SECRET,
+  GOOGLE_CLIENT_ID,
+  GOOGLE_CLIENT_SECRET,
+} from "./constants";
+import GoogleProvider from "next-auth/providers/google";
 
 export const authConfig: NextAuthOptions = {
   providers: [
@@ -15,6 +21,30 @@ export const authConfig: NextAuthOptions = {
           name: profile.name,
           email: profile.email,
           profile: profile.avatar_url,
+        };
+        const response = await providersAuth(userData);
+
+        if (response.success === false) {
+          throw new Error("Error authenticating with Github");
+        }
+        const user = {
+          ...response.data.user,
+          accessToken: response.data.accessToken,
+          refreshToken: response.data.refreshToken,
+        };
+
+        return user;
+      },
+    }),
+    GoogleProvider({
+      clientId: GOOGLE_CLIENT_ID,
+      clientSecret: GOOGLE_CLIENT_SECRET,
+      async profile(profile) {
+        const userData = {
+          googleId: profile.sub,
+          name: profile.name,
+          email: profile.email,
+          profile: profile.picture,
         };
         const response = await providersAuth(userData);
 

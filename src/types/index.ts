@@ -33,6 +33,8 @@ export interface User {
   role: Role;
   subRole: SubRole;
   projectAssigned?: number;
+  githubId: number | null;
+  googleId: string | null;
 }
 
 export interface NavItem {

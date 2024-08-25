@@ -8,6 +8,7 @@ import { Label } from "../ui/label";
 import { Button } from "../ui/button";
 import { Icons } from "../ui/icons";
 import GithubSignInButton from "./github-auth-button";
+import GoogleSignInButton from "./google-auth-button";
 interface UserAuthFormProps extends React.HTMLAttributes<HTMLDivElement> {}
 
 const LoginForm: React.FC<UserAuthFormProps> = ({ className, ...props }) => {
@@ -105,7 +106,11 @@ const LoginForm: React.FC<UserAuthFormProps> = ({ className, ...props }) => {
           </Button>
         </div>
       </form>
-      <GithubSignInButton />
+      <div className="flex gap-2">
+        <GithubSignInButton />
+        <GoogleSignInButton />
+        <GoogleSignInButton />
+      </div>
     </div>
   );
 };
