@@ -34,7 +34,13 @@ const ProjectHeader = ({ appData }: { appData: ProjectDetails }) => {
             <p className="text-lg mb-4 text-gray-400 flex items-center gap-5">
               {appData.developer}
               <Link href={appData.appUrl} className="mr-2" target="_blank">
-                <PlayStoreIcon />
+                {appData.appType == "google" ? (
+                  <Icons.PlayStore />
+                ) : appData.appType == "apple" ? (
+                  <Icons.apple className="w-6 h-6" />
+                ) : (
+                  <Icons.web className="w-6 h-6" />
+                )}
               </Link>
             </p>
           </div>

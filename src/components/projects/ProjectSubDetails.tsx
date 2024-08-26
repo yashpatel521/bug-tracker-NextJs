@@ -44,7 +44,7 @@ const ProjectSubDetails = ({ data }: { data: ProjectDetails }) => {
               privacy policy
             </p>
             <div className="ml-auto font-medium">
-              <Link href={data.privacyPolicyUrl} target="_blank">
+              <Link href={data.privacyPolicyUrl || ""} target="_blank">
                 <SecureTickIcon className="w-5 h-5 text-green-500" />
               </Link>
             </div>

@@ -20,12 +20,15 @@ const AddProjectDailog = ({ app }: { app: ProjectDetails }) => {
   const AddIcon = Icons["bookmarkPlus"];
   const router = useRouter();
   const handleClick = async () => {
+    setLoading(true);
     try {
       const res = await addApp(app.appId);
       customToast("App has been added to your dashboard", "success");
       router.replace(`/dashboard/projects/${res.id}`);
     } catch (error: any) {
       customToast(error.message, "error");
+    } finally {
+      setLoading(false);
     }
   };
   return (
