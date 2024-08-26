@@ -96,14 +96,31 @@ export function generateRandomPassword(): string {
 }
 
 export function newVersionNumber(versionNumber: string): string {
-  const versionParts = versionNumber.split(".");
+  // Split the version number into parts
+  let versionParts = versionNumber.split(".");
+
+  // Ensure the version number has three parts
+  while (versionParts.length < 3) {
+    versionParts.push("0");
+  }
+
+  // Get the last part, which will be incremented
   const lastPart = versionParts.pop();
+
+  // Validate that the last part is a number
   if (lastPart === undefined || isNaN(parseInt(lastPart))) {
     throw new Error("Invalid version number format");
   }
+
+  // Increment the last part
   const incrementedPart = (parseInt(lastPart) + 1).toString();
+
+  // Add the incremented part back to the version parts
   versionParts.push(incrementedPart);
+
+  // Join the parts back into a version string
   const newVersion = versionParts.join(".");
+
   return newVersion;
 }
 

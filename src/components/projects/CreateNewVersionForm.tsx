@@ -35,7 +35,7 @@ const CreateNewVersionForm = ({
             name="versionNumber"
             className="mt-1 p-2 w-full border rounded-md shadow-sm h-8"
             placeholder="Enter version name"
-            value={
+            defaultValue={
               projectData.versions?.[0]?.versionNumber
                 ? newVersionNumber(projectData.versions?.[0]?.versionNumber)
                 : "1.0.0"
