@@ -30,6 +30,13 @@ export const navItemsData: NavItem[] = [
     access: ["admin"],
   },
   {
+    title: "Bugs",
+    href: "/dashboard/user/bugs",
+    icon: "kanban",
+    label: "Bugs for Me",
+    access: ["all"],
+  },
+  {
     title: "Track Live Project",
     href: "/dashboard/trackliveProject",
     icon: "gitlab",

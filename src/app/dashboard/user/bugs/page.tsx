@@ -6,19 +6,17 @@ import { authConfig } from "@/lib/authConfig";
 import UserProfile from "@/components/user/UserProfile";
 import { getUserprofile } from "@/action/user";
 import ChangePasswordForm from "@/components/user/ChangePasswordForm";
+import { UserBugs } from "@/components/projects/Bug/UserBugs";
 
 const ProfilePage = async () => {
   const data = await getServerSession(authConfig);
   const userProfile = await getUserprofile(data?.user.id);
-  const breadcrumbItems = [
-    { title: "Profile", link: "/dashboard/user/profile" },
-  ];
+  const breadcrumbItems = [{ title: "Bugs", link: "/dashboard/user/bugs" }];
   return (
     <div className="space-y-4 p-4 pt-6 md:p-8">
       <BreadCrumb items={breadcrumbItems} />
       <Separator />
-      <UserProfile user={userProfile} />
-      <ChangePasswordForm />
+      <UserBugs />
     </div>
   );
 };

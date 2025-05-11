@@ -26,6 +26,7 @@ export async function searchApp(term: string) {
 
 export async function addDailyStats() {
   const result = await SECURE_GET(`/liveTrack/checkDailyStats`);
-  if (!result.success) throw new Error(result.message);
-  return result.data;
+  // if (!result.success) throw new Error(result.message);
+  // return result.data;
+  return true;
 }
