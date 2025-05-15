@@ -37,9 +37,17 @@ export async function createBug(formData: FormData) {
   redirect(`/dashboard/projects/${formData.get("projectId")}?view=bugs`);
 }
 
-export async function getUserBugs() {
-  const result = await SECURE_GET(`/users/bugs`);
-  console.log(result);
-  if (!result.success) throw new Error(result.message);
+export async function getUserBugs(
+  query: string = "",
+  currentPage: number | string = 1,
+  sortBy: string = "createdAt",
+  sortOrder: string = "desc"
+) {
+  const result = await SECURE_GET(
+    `/users/bugs?sortBy=${sortBy}&sortOrder=${sortOrder}&query=${query}&currentPage=${currentPage}`
+  );
+  if (!result.success) {
+    throw new Error(result.message);
+  }
   return result.data;
 }

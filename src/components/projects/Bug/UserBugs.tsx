@@ -19,13 +19,24 @@ import { Avatar, AvatarImage, AvatarFallback } from "@/components/ui/avatar";
 import { getInitials, truncateWords } from "@/lib/utils";
 import { FeatureBadge, PriorityBadge, StatusBadge } from "./tableProps";
 import AvatarList from "@/components/ui/AvatarList";
+import BugSheet from "./BugSheet";
 
-export const UserBugs = () => {
-  const searchParams = useSearchParams();
+export const UserBugs = ({
+  searchParams,
+}: {
+  searchParams: {
+    query?: string;
+    currentPage?: string;
+    sortBy?: string;
+    sortOrder?: string;
+  };
+}) => {
+  // const searchParams = useSearchParams();
   const pathname = usePathname();
   const { replace } = useRouter();
   const [userbugs, setUserBugs] = useState([]);
-  const currentPage = parseInt(searchParams?.get("currentPage") || "1", 10);
+  const currentPage = parseInt(searchParams.currentPage || "1", 10);
+  const [totalPages, setTotalPages] = useState(1);
 
   const params = new URLSearchParams(searchParams.toString());
 
@@ -49,7 +60,7 @@ export const UserBugs = () => {
 
   const handleNext = () => {
     const page = currentPage;
-    if (page < 10) {
+    if (page < totalPages) {
       params.set("currentPage", (page + 1).toString());
       replace(`${pathname}?${params.toString()}`);
     }
@@ -57,8 +68,14 @@ export const UserBugs = () => {
 
   useEffect(() => {
     const fetchData = async () => {
-      const bugsData = await getUserBugs(); // Make sure this respects searchParams
-      setUserBugs(bugsData);
+      const bugsData = await getUserBugs(
+        searchParams.query,
+        searchParams.currentPage,
+        searchParams.sortBy,
+        searchParams.sortOrder
+      ); // Make sure this respects searchParams
+      setUserBugs(bugsData.bugs);
+      setTotalPages(bugsData.totalPages);
     };
     fetchData();
   }, [searchParams]);
@@ -70,7 +87,7 @@ export const UserBugs = () => {
           placeholder="Search bugs..."
           className="max-w-sm"
           onChange={(e) => handleSearch(e.target.value)}
-          defaultValue={searchParams?.get("query")?.toString()}
+          defaultValue={searchParams?.query?.toString() || ""}
         />
         <div className="flex items-center justify-end space-x-2 py-4">
           <Button
@@ -85,7 +102,7 @@ export const UserBugs = () => {
             variant="outline"
             size="sm"
             onClick={handleNext}
-            disabled={currentPage >= 10}
+            disabled={currentPage >= totalPages}
           >
             Next
           </Button>
@@ -106,7 +123,9 @@ export const UserBugs = () => {
             <TableHead className="text-center">
               <SortButton title="Priority" sortKey="priority" />
             </TableHead>
-            <TableHead className="text-center">Created By</TableHead>
+            <TableHead className="text-center">
+              <SortButton title="Project Name" sortKey="projectTitle" />
+            </TableHead>
             <TableHead className="text-center">Assigned To</TableHead>
             <TableHead className="text-center">Action</TableHead>
           </TableRow>
@@ -141,17 +160,14 @@ export const UserBugs = () => {
                 <TableCell className="font-medium flex items-center justify-center gap-2 capitalize">
                   <Avatar className="h-6 w-6 my-2">
                     <AvatarImage
-                      src={bug.reportedBy.profile}
-                      alt={`${bug.reportedBy.firstName} ${bug.reportedBy.lastName}`}
+                      src={bug.project.appIcon}
+                      alt={`${bug.project.title} logo`}
                     />
                     <AvatarFallback>
-                      {getInitials(
-                        bug.reportedBy.firstName,
-                        bug.reportedBy.lastName
-                      )}
+                      {getInitials(bug.project.title, bug.project.title)}
                     </AvatarFallback>
                   </Avatar>
-                  {bug.reportedBy.firstName} {bug.reportedBy.lastName}
+                  {bug.project.title}
                 </TableCell>
                 <TableCell>
                   <div className="flex justify-center">
@@ -159,7 +175,7 @@ export const UserBugs = () => {
                   </div>
                 </TableCell>
                 <TableCell className="flex justify-center">
-                  {/* <BugSheet id={bug.id} userProjects={[]} /> */}
+                  <BugSheet id={bug.id} userProjects={[]} />
                 </TableCell>
               </TableRow>
             ))
