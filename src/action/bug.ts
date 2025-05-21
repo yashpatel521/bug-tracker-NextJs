@@ -30,7 +30,6 @@ export async function deleteBugImage(imageId: number) {
   return result.data;
 }
 export async function createBug(formData: FormData) {
-  console.log(formData);
   const result = await SECURE_POST("/projects/bugs", formData);
   if (!result.success) throw new Error(result.message);
   revalidatePath(`/dashboard/projects/${formData.get("projectId")}?view=bugs`);

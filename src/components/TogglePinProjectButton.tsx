@@ -24,7 +24,6 @@ const TogglePinProjectButton = ({
         customToast("Failed to pin project", "error");
       }
     } catch (error) {
-      console.error(error);
       customToast("Failed to pin project", "error");
     }
   };

@@ -44,6 +44,13 @@ export const navItemsData: NavItem[] = [
     access: ["all"],
   },
   {
+    title: "Chats",
+    href: "/dashboard/chats",
+    icon: "messageCircleMore",
+    label: "Chats",
+    access: ["all"],
+  },
+  {
     title: "Profile",
     href: "/dashboard/user/profile",
     icon: "user",

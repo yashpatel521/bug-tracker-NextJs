@@ -50,7 +50,6 @@ export async function createNewVersion(formData: FormData) {
 }
 
 export async function deleteVersion(formData: FormData) {
-  // console.log(formData);
   const result = await SECURE_DELETE(
     `/projects/version/${formData.get("versionId")}`
   );

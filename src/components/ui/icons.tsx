@@ -38,10 +38,12 @@ import {
   BookmarkPlus,
   CircleX,
   WebhookIcon,
+  MessageCircleMore,
 } from "lucide-react";
 
 export type IconType = LucideIcon;
 export const Icons: any = {
+  messageCircleMore: MessageCircleMore,
   dashboard: LayoutDashboardIcon,
   pencil2: Pencil2Icon,
   login: LogIn,

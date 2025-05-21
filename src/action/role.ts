@@ -11,9 +11,7 @@ export async function getAllRole() {
 }
 
 export async function createNewRole(name: string) {
-  console.log("name", name);
   const result = await SECURE_POST("/roles", { name });
-  console.log(result);
   if (!result.success) {
     throw new Error(result.message);
   }

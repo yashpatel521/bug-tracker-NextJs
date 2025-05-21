@@ -65,7 +65,6 @@ export async function SECURE_POST(
     const data = await res.json();
     return data;
   } catch (error) {
-    console.error("Fetch error:", error);
     return {
       success: false,
       message: "Failed to fetch data",
@@ -89,7 +88,6 @@ export async function SECURE_DELETE(url: string): Promise<ResponseType> {
     const data = await res.json();
     return data;
   } catch (error) {
-    console.error("Fetch error:", error);
     return {
       success: false,
       message: "Failed to fetch data",
