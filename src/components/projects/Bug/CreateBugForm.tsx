@@ -258,6 +258,9 @@ const CreateBugForm = ({ projectId }: { projectId: number }) => {
               id="description"
               name="description"
               placeholder="Enter project description"
+              onChange={(e) =>
+                setBugData({ ...bugData, description: e.target.value })
+              }
             />
           </div>
         </div>
